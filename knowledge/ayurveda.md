@@ -17,6 +17,13 @@ The app draws guidance from here. We cite; we do not redistribute.
 
 Citations below reference AH Sūtrasthāna Chapter 1 (Āyuṣkāmīya) verse numbers. Charaka/Sushruta cross-references to be added as read.
 
+### Complementary modern authors (to read — copyrighted: distil & cite, never copy)
+The ancient samhitas above are the *authority*; these are the *accessible bridge*.
+- **Vasant Lad** — *The Science of Self-Healing* / *Ayurvedic Home Remedies* → daily routine, food, practical remedies (backbone of lifestyle content).
+- **David Frawley** — *Yoga & Ayurveda* → the **yoga/pranayama-per-dosha** layer (Vanessa's domain).
+- **Sebastian Pole** (Pukka co-founder) — *Ayurvedic Medicine* → herbs, teas, the *reachable* voice. (Alex's entry point into Ayurveda.)
+- **Robert Svoboda** — *Prakriti* → depth on constitution (Prakriti/Vikriti), readably.
+
 ---
 
 ## The governing principle (this is the engine)
@@ -119,7 +126,28 @@ _To be read from AH Su. Ch. 2 (Dinacharyā) and Charaka — next pass._
 ## Food & lifestyle by dosha
 _Build from the rasa table above + Dinacharya — next pass._
 
-## Yoga, pranayama, meditation
+## Breath & movement by dosha (PROVISIONAL — the yoga layer)
+
+> **Vanessa's domain.** Draft from established yoga–Ayurveda synthesis, for her to
+> correct and deepen. Note: precise *pranayama/asana → dosha* mappings come from the
+> **yoga tradition & modern synthesis (esp. Frawley, *Yoga & Ayurveda*; Lad)**, NOT
+> the ancient samhitas. Same governing law applies — **opposites pacify.**
+
+**Vāta** (cold, mobile, dry, scattered) → *ground · warm · steady*
+- Breath: **Nadi Shodhana** (alternate-nostril, steadying); gentle Ujjayi. Avoid fast/forceful breath.
+- Move: slow, grounding, stable — forward folds, gentle standing poses, child's pose. Consistency over intensity.
+
+**Pitta** (hot, sharp, intense) → *cool · calm · soften*
+- Breath: **Sheetali / Sitkari** (cooling breaths); left-nostril / Chandra Bhedana (cooling).
+- Move: cooling, non-competitive — easy twists, moon-toned practice. Avoid midday heat & overexertion. Surrender over striving.
+
+**Kapha** (heavy, slow, cold, stable) → *stimulate · warm · lighten*
+- Breath: **Kapalabhati / Bhastrika** (heating, energising); right-nostril / Surya Bhedana (heating).
+- Move: vigorous, warming, lifting — sun salutations, backbends, flowing sequences. Build heat & momentum.
+
+_(Already reflected in the app's "Breath" and "Move" guidance lines — this is the source layer behind them.)_
+
+## Meditation, Yoga Nidra, relaxation
 _Vanessa's domain — to be authored with her._
 
 ---
