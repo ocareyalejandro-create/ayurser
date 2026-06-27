@@ -150,6 +150,33 @@ _(Already reflected in the app's "Breath" and "Move" guidance lines — this is 
 ## Meditation, Yoga Nidra, relaxation
 _Vanessa's domain — to be authored with her._
 
+## Women's health — cycle-aware (PROVISIONAL)
+
+> Distilled from **Kate O'Donnell, *Everyday Ayurveda for Women's Health***
+> (copyrighted — paraphrased, cited, not copied). Vanessa's domain to confirm/deepen.
+> **Not medical advice — the book itself repeatedly defers to a practitioner.**
+
+The distinctive, *safe* frame: a woman's **needs shift across her cycle** — the doshas
+take turns. This is **"your needs are not constant"** at the timescale of a month,
+and it's the women's-health wedge: cycle-*aware*, never hormonal/medical claims.
+
+- **Menstruation (~days 1–5):** **Vāta** leads — *apana vāyu*, the downward-moving
+  current that governs the flow. Needs: rest, warmth, grounding, less exertion.
+- **Building phase (~days 5–16, *rutukala*):** **Kapha** rises — building *rasa
+  dhātu* (nourishing juices), the fertile, building time. Needs: nourishment,
+  steadiness, more capacity for activity.
+- **Premenstrual (~days 16–28, *rutavateetakala*):** **Pitta** rises — through
+  *rakta dhātu*; the lining matures. Needs: cooling, calm, ease; watch heat/irritability.
+- (The phases echo the moon's cycle — energetically, not by literal overlap.)
+
+Life stages shift the dominant dosha too; **menopause is a Vāta-increasing transition.**
+Key women's tonic herb: **Shatavari** (supports *artava*, the reproductive tissue/essence).
+
+**Line we don't cross:** cycle-*aware* guidance (gentler vs. more energising by phase)
+is safe and beautiful; hormonal or medical claims are not ours to make — defer to a
+practitioner. (Product note: a gentle, optional cycle phase in the check-in could
+make guidance feel remarkably personal — and it's Vanessa's authority to shape.)
+
 ---
 
 ### Term check for the intro copy
