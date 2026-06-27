@@ -2,3 +2,7 @@ node_modules/
 .vercel/
 .DS_Store
 .vercel
+
+# Source texts live locally only — never redistributed (copyright + repo size)
+references/*
+!references/README.md
