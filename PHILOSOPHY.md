@@ -16,6 +16,24 @@
 
 ---
 
+## The real job: integration
+
+Underneath the doshas and the rituals, the job this app does is **integration** —
+helping someone keep a practice alive after a life-changing experience, when the
+will is weak and the old self is pulling them back.
+
+People come home from retreats — yoga, meditation, Vipassana, Ayurveda — cracked
+open and changed, holding a journal and a handful of practices. Within weeks the
+former self quietly reabsorbs them. Not for lack of knowledge — they *have* the
+tools. For lack of a **container**: the rhythm, the gentle authority, the
+community the retreat gave them, all left behind at the gate.
+
+Ayurser is that container, carried home. **Ayurveda and yoga are its first
+language; integration is its purpose.** It exists for the version of you sitting
+at the computer with no willpower left — not the version on the cushion.
+
+---
+
 ## Weather, not labels
 
 You are a mix of three doshas, with one that tends to lead.
@@ -36,6 +54,33 @@ discovers you slowly.** That humility is the whole differentiator — and it
 dissolves the trap every other app falls into: selling a final verdict off a
 one-minute form. We stop pretending the verdict is final, and the product gets
 *more* trustworthy, not less.
+
+---
+
+## Design for the weak-willed morning
+
+Every wellness app is built for the inspired, disciplined version of you — then
+*shames* you with a broken streak the moment you're the tired, former-self
+version who actually needs help. That is backwards.
+
+**Assume no willpower.** Meet the weak morning with one tiny, kind, frictionless
+ask — never a regimen, never a guilt trip. Lower the activation energy until the
+practice is almost easier to do than to skip. **Forgiving, never shaming** — a
+missed day is met with a hand, not a broken chain. Build for the person at the
+computer, not the person on the cushion.
+
+---
+
+## The app that sends you away
+
+A tool whose soul is *slow down, come back to your body* cannot, in good
+conscience, farm your attention. No nagging notifications, no infinite scroll,
+no streak-shame, no engagement for its own sake.
+
+**Open, give one breath and one thing, then send the person away** — phone down,
+to the mat, to the kitchen, to their life. We measure success by time spent
+*living*, not time spent in the app. Something a digital detox retreat could
+hand its guests without blushing.
 
 ---
 
