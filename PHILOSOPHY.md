@@ -47,6 +47,22 @@ more truly Ayurvedic than "here is your permanent type."
 
 ---
 
+## Real words, warm doorways
+
+Honour the tradition *and* open the door. Every Ayurvedic term arrives holding
+hands with a plain image — never the jargon naked, never the meaning stripped of
+its true name.
+
+- *Vata* — the **wind**. *Pitta* — the **fire**. *Kapha* — the **earth**.
+- *Prakriti* — your **nature**. *Vikriti* — your **weather**.
+
+The practitioner hears the real vocabulary, respected. The newcomer walks through
+without losing a neuron. Nobody is talked down to; nobody is locked out.
+
+*(Working similes — to be checked against the sources and felt out with practitioners.)*
+
+---
+
 ## Honesty is the edge
 
 The app does not pretend to know you in sixty seconds. **It listens daily, and
