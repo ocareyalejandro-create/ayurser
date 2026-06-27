@@ -16,6 +16,20 @@
 
 ---
 
+## Individual-first — inclusion, not a wall
+
+Ayurveda reads the *person*, not the category. Prakriti is *your* unique
+constitution (*AH Su. 1.9–10*) — described by qualities, never by gender. So the
+core of Ayurser is **for any body**: the same quality-based reading for everyone.
+
+We care for specifics — a cycle, a life-stage — but we **never segregate.** No
+"for women" framing, no walled-off rooms. Specifics appear as *optional layers*,
+offered by relevance to whoever they serve, woven into a whole that belongs to
+everyone. **Caring, not categorising.** And we ask the *relevant fact* — "do you
+track a cycle?" — never assume a label.
+
+---
+
 ## The real job: integration
 
 Underneath the doshas and the rituals, the job this app does is **integration** —
@@ -60,6 +74,30 @@ The practitioner hears the real vocabulary, respected. The newcomer walks throug
 without losing a neuron. Nobody is talked down to; nobody is locked out.
 
 *(Working similes — to be checked against the sources and felt out with practitioners.)*
+
+---
+
+## Experience first, explanation second
+
+The deepest law of the app — for *everything*, not just onboarding. People engage
+because something felt *for them*, not because they were taught. So: let them feel
+seen, **then** explain — and only if they reach for it.
+
+- Don't teach the doshas — give a result, then offer *"why did we ask that?"*
+- Don't explain oil pulling — recommend it, explain on a tap.
+- Don't lecture the foods — show today's, teach the rest in context.
+
+Teach Ayurveda **at the exact moment it becomes meaningful** (just-in-time), never
+before. Education is a door you can open, never a hallway you must walk.
+
+---
+
+## Talk to the person, not the tradition
+
+The app speaks in *we* and *you* — never narrating the tradition in third person.
+Not "Ayurveda listens" → **"we'll listen together."** Not "Ayurveda tends it" →
+**"small daily choices can gently bring you back."** A companion, not a textbook.
+Every line should sound spoken *to* someone, warmly.
 
 ---
 
