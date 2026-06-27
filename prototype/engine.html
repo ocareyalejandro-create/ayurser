@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ayurser — engine (regrounded)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F6F1E8; --char:#2F2925; --terra:#B87A54; --walnut:#6B4A34;
+    --sage:#98A27D; --sand:#DDD1BC; --card:#FCFAF4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{max-width:100%;overflow-x:hidden}
+  body{background:var(--ivory);color:var(--char);font-family:'Inter',system-ui,sans-serif;
+    min-height:100vh;display:flex;align-items:center;justify-content:center;padding:48px 22px;
+    -webkit-font-smoothing:antialiased}
+  .stage{width:100%;max-width:520px}
+  .serif{font-family:'Cormorant Garamond',serif}
+  h1{font-weight:300;font-size:clamp(34px,9vw,52px);line-height:1.05;letter-spacing:.4px}
+  h2{font-weight:300;font-size:clamp(28px,7vw,40px);line-height:1.15;letter-spacing:.3px}
+  .kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--terra);margin-bottom:18px}
+  .quiet{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--sage);font-size:18px}
+  .seg{display:flex;gap:7px;margin-bottom:46px}
+  .seg span{flex:1;height:2px;border-radius:2px;background:var(--sand);transition:background .5s}
+  .seg span.on{background:var(--terra)}
+  .opt{display:block;width:100%;text-align:left;margin-top:12px;padding:16px 20px;border-radius:14px;
+    border:1px solid var(--sand);background:rgba(255,255,255,.5);color:var(--char);
+    font-family:'Inter',sans-serif;font-size:15.5px;cursor:pointer;transition:all .3s}
+  .opt:hover{border-color:var(--terra);background:rgba(184,122,84,.07)}
+  .btn{margin-top:40px;background:var(--terra);color:var(--ivory);border:none;border-radius:999px;
+    padding:16px 40px;font-family:'Inter',sans-serif;font-size:15px;letter-spacing:.3px;cursor:pointer;
+    box-shadow:0 10px 30px -16px rgba(107,74,52,.55);transition:all .35s}
+  .btn:hover{background:#a96d49;transform:translateY(-1px)}
+  .center{text-align:center}
+  .card{background:linear-gradient(168deg,#FCFAF4,#F7F1E6);border:1px solid var(--sand);
+    border-radius:22px;padding:46px 40px 34px;box-shadow:0 36px 70px -38px rgba(107,74,52,.4)}
+  .row{display:flex;gap:18px;padding:18px 0;border-top:1px solid rgba(221,209,188,.8)}
+  .row .lab{width:54px;flex:none;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);padding-top:4px}
+  .row .body{font-family:'Cormorant Garamond',serif;font-size:20px;line-height:1.4;color:#3a322c}
+  .foot{text-align:center;font-size:10.5px;color:#a89c8d;line-height:1.6;margin-top:26px}
+  .back{margin-top:30px;background:none;border:none;color:var(--walnut);opacity:.5;font-size:13px;cursor:pointer;padding:0}
+  .back:hover{opacity:.85}
+  .fade{animation:fade .6s ease both}@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="stage" id="stage"></div>
+<script>
+const QUESTIONS = [
+  {key:'sleep', q:'How did you sleep?', opts:[
+    {l:'Deep and restful', d:null},
+    {l:'Light, broken, restless', d:'vata'},
+    {l:'Heavy, hard to wake', d:'kapha'}]},
+  {key:'energy', q:'Your energy right now?', opts:[
+    {l:'Calm and steady', d:null},
+    {l:'Wired or restless', d:'vata'},
+    {l:'Hot, intense, pushing', d:'pitta'},
+    {l:'Heavy, sluggish', d:'kapha'}]},
+  {key:'body', q:'How does your body feel?', opts:[
+    {l:'Comfortable', d:null},
+    {l:'Dry, cold, or gassy', d:'vata'},
+    {l:'Hot, sharp, inflamed', d:'pitta'},
+    {l:'Heavy, slow, congested', d:'kapha'}]},
+  {key:'mind', q:'And your mind today?', opts:[
+    {l:'Settled', d:null},
+    {l:'Anxious, scattered', d:'vata'},
+    {l:'Irritable, intense', d:'pitta'},
+    {l:'Foggy, stuck', d:'kapha'}]},
+];
+
+// The regrounded engine: which qualities run high today -> offer their opposites.
+// "Like increases like; opposites restore balance." — Ashtanga Hridaya, Sutrasthana 1.13
+const CONTENT = {
+  vata:{phrase:'Ground & Warm',
+    why:'Today leans <b>Vata</b> — light, dry, a little scattered.',
+    because:'So we meet it with its opposites: warmth, weight and rhythm.',
+    eat:'Warm, cooked, lightly oiled food — oats with ghee, soups, stews.',
+    ritual:'Warm oil on the feet; a steady, unhurried routine.',
+    breath:'Nadi Shodhana — slow alternate-nostril breathing.',
+    move:'Slow, grounding movement; gentle forward folds.'},
+  pitta:{phrase:'Cool & Soften',
+    why:'Today leans <b>Pitta</b> — hot, sharp, intense.',
+    because:'So we cool and soften: ease, shade and sweetness.',
+    eat:'Cooling foods — cucumber, coconut, mint, sweet fruit. Less heat and spice.',
+    ritual:'Shade, a little rose water, an unhurried walk.',
+    breath:'Sheetali — the cooling breath.',
+    move:'Easy and non-competitive — gentle twists, a swim if you can.'},
+  kapha:{phrase:'Stir & Lighten',
+    why:'Today leans <b>Kapha</b> — heavy, slow, holding on.',
+    because:'So we stir and lighten: warmth, movement and stimulation.',
+    eat:'Light, warm, spiced food. Skip the heavy and the sweet.',
+    ritual:'Dry brushing before a warm shower; open a window.',
+    breath:'Kapalabhati — gentle, energising breath.',
+    move:'Brisk movement — a few sun salutations to begin the day.'},
+  balanced:{phrase:'In Balance',
+    why:'Nothing is pulling you off centre today.',
+    because:'So there is nothing to correct — just tend what is already working.',
+    eat:'Eat as you naturally would; favour warm, fresh, simple food.',
+    ritual:'Keep the rhythms that are serving you.',
+    breath:'A few slow breaths, simply to arrive.',
+    move:'Move in whatever way feels good today.'},
+};
+
+let step = 0;
+const answers = {};
+const stage = document.getElementById('stage');
+
+function compute(){
+  const score = {vata:0, pitta:0, kapha:0};
+  QUESTIONS.forEach(q => { const d = answers[q.key]; if(d) score[d]++; });
+  const max = Math.max(score.vata, score.pitta, score.kapha);
+  if(max === 0) return CONTENT.balanced;          // the honest "in balance" outcome
+  const lead = ['vata','pitta','kapha'].find(k => score[k] === max);
+  return CONTENT[lead];
+}
+
+function seg(active){
+  let s = '<div class="seg">';
+  for(let i=0;i<QUESTIONS.length;i++) s += `<span class="${i<=active?'on':''}"></span>`;
+  return s + '</div>';
+}
+
+function renderIntro(){
+  stage.innerHTML = `<div class="center fade">
+    <p class="kicker">Ayurser · engine</p>
+    <h1 class="serif">How are you<br>today?</h1>
+    <p class="quiet" style="margin-top:18px">A one-minute check-in.</p>
+    <button class="btn" onclick="start()">Begin</button>
+    <p class="foot" style="margin-top:34px">Regrounded on the Ayurvedic law of opposites.</p>
+  </div>`;
+}
+function start(){ step = 0; renderQ(); }
+
+function renderQ(){
+  const q = QUESTIONS[step];
+  let opts = q.opts.map((o,i)=>`<button class="opt" onclick="pick('${q.key}','${o.d}')">${o.l}</button>`).join('');
+  stage.innerHTML = `<div class="fade">${seg(step)}
+    <p class="kicker">Question ${step+1} of ${QUESTIONS.length}</p>
+    <h2 class="serif" style="margin-bottom:32px">${q.q}</h2>
+    ${opts}
+    ${step>0?'<button class="back" onclick="back()">&larr;&nbsp;&nbsp;Back</button>':''}
+  </div>`;
+}
+function pick(key, d){
+  answers[key] = (d === 'null') ? null : d;
+  if(step < QUESTIONS.length-1){ step++; renderQ(); } else renderResult();
+}
+function back(){ if(step>0){ step--; renderQ(); } }
+
+function renderResult(){
+  const c = compute();
+  stage.innerHTML = `<div class="fade">
+    <div class="card">
+      <div class="center" style="margin-bottom:24px">
+        <p class="kicker">Today's focus</p>
+        <h2 class="serif" style="font-weight:400">${c.phrase}</h2>
+        <p class="quiet" style="margin-top:14px">${c.why} ${c.because}</p>
+      </div>
+      <div class="row"><div class="lab">Eat</div><div class="body">${c.eat}</div></div>
+      <div class="row"><div class="lab">Ritual</div><div class="body">${c.ritual}</div></div>
+      <div class="row"><div class="lab">Breath</div><div class="body">${c.breath}</div></div>
+      <div class="row"><div class="lab">Move</div><div class="body">${c.move}</div></div>
+      <p class="foot">Like increases like; opposites restore balance.<br>
+        — Ashtanga Hridaya, Sutrasthana 1.13 · Lifestyle guidance inspired by Ayurveda, not medical advice.</p>
+    </div>
+    <div class="center"><button class="btn" onclick="renderIntro()">Again</button></div>
+  </div>`;
+}
+
+renderIntro();
+</script>
+</body>
+</html>
