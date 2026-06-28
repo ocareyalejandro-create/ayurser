@@ -111,6 +111,22 @@ function Intro({ onBegin }: { onBegin: () => void }) {
       <button className={styles.btn} onClick={onBegin}>
         Begin today&rsquo;s check-in
       </button>
+      <Teaser />
+    </div>
+  );
+}
+
+/** The quiet footer teaser — kept, honestly "coming soon". Shared by the intro
+ *  (below Begin) and the result screen. */
+function Teaser() {
+  return (
+    <div className={styles.teaser}>
+      <div className={styles.teaserLinks}>
+        <span className={styles.teaserLink}>Wisdom</span>
+        <span className={styles.teaserDot} aria-hidden />
+        <span className={styles.teaserLink}>Find a practitioner</span>
+      </div>
+      <p className={styles.teaserSoon}>Coming soon</p>
     </div>
   );
 }
@@ -242,14 +258,7 @@ function ResultView({ result, onAgain }: { result: Result; onAgain: () => void }
       </div>
 
       {/* Practitioner teaser — kept, honestly "coming soon". */}
-      <div className={styles.teaser}>
-        <div className={styles.teaserLinks}>
-          <span className={styles.teaserLink}>Wisdom</span>
-          <span className={styles.teaserDot} aria-hidden />
-          <span className={styles.teaserLink}>Find a practitioner</span>
-        </div>
-        <p className={styles.teaserSoon}>Coming soon</p>
-      </div>
+      <Teaser />
 
       <div className={styles.again}>
         <button className={styles.btn} onClick={onAgain}>
