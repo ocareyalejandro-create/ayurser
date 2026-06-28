@@ -241,14 +241,15 @@ const KAPHA = answer({
 /** Every guidance line on a result, for shape assertions. */
 function allLines(r: ReturnType<typeof evaluate>) {
   const g = r.guidance;
-  return [g.anchor, g.eat, g.breath, g.move];
+  return [g.anchor, g.eat, g.ritual, g.breath, g.move];
 }
 
-describe("result shape: one anchor loud, supporting trio quiet", () => {
-  it("every outcome carries an anchor plus eat/breath/move, each with text/detail/source", () => {
+describe("result shape: one anchor loud, supporting quartet quiet", () => {
+  it("every outcome carries an anchor plus eat/ritual/breath/move, each with text/detail/source", () => {
     for (const a of [VATA, PITTA, KAPHA, answer(ALL_CALM)]) {
       const r = evaluate(a);
       expect(r.guidance.anchor).toBeDefined();
+      expect(r.guidance.ritual).toBeDefined();
       for (const line of allLines(r)) {
         expect(typeof line.text).toBe("string");
         expect(line.text.length).toBeGreaterThan(0);
@@ -264,6 +265,18 @@ describe("result shape: one anchor loud, supporting trio quiet", () => {
     for (const line of allLines(r)) {
       expect(line.detail).not.toBe(line.text);
     }
+  });
+
+  it("the ritual line is distinct from the anchor — they do not echo", () => {
+    // Vata's anchor is the oil-on-feet ritual; the Ritual line must differ.
+    for (const a of [VATA, PITTA, KAPHA, answer(ALL_CALM)]) {
+      const g = evaluate(a).guidance;
+      expect(g.ritual.text).not.toBe(g.anchor.text);
+    }
+    const vata = evaluate(VATA).guidance;
+    expect(vata.anchor.text.toLowerCase()).toMatch(/sesame|feet|sole/);
+    // The ritual is a different routine element (tongue scraping / warm water).
+    expect(vata.ritual.text.toLowerCase()).not.toMatch(/sesame oil/);
   });
 });
 

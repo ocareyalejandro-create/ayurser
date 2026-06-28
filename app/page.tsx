@@ -141,8 +141,9 @@ function ResultView({ result, onAgain }: { result: Result; onAgain: () => void }
         {/* ONE anchor, loud. The single frictionless thing for the morning. */}
         <Anchor line={guidance.anchor} />
 
-        {/* The supporting trio, quiet. */}
+        {/* The supporting quartet, quiet. */}
         <GuidanceRow label="Eat" line={guidance.eat} />
+        <GuidanceRow label="Ritual" line={guidance.ritual} />
         <GuidanceRow label="Breath" line={guidance.breath} />
         <GuidanceRow label="Move" line={guidance.move} />
 
@@ -177,7 +178,7 @@ function Anchor({ line }: { line: GuidanceLine }) {
   );
 }
 
-/** A quiet supporting line: Eat / Breath / Move, with tappable depth. */
+/** A quiet supporting line: Eat / Ritual / Breath / Move, with tappable depth. */
 function GuidanceRow({ label, line }: { label: string; line: GuidanceLine }) {
   const why = useWhy();
   return (
@@ -191,14 +192,14 @@ function GuidanceRow({ label, line }: { label: string; line: GuidanceLine }) {
   );
 }
 
-/** Local open/closed state for one expandable "why?". */
+/** Local open/closed state for one expandable depth panel. */
 function useWhy() {
   const [open, setOpen] = useState(false);
   return { open, toggle: () => setOpen((v) => !v) };
 }
 
 /**
- * The restrained "why?" affordance. Hidden until tapped: a subtle underlined
+ * The restrained "More" affordance. Hidden until tapped: a subtle underlined
  * link reveals the paraphrased detail + its attribution. No clutter, no jargon.
  */
 function WhyToggle({
@@ -218,7 +219,7 @@ function WhyToggle({
         aria-expanded={open}
         onClick={toggle}
       >
-        {open ? "Less" : "Why?"}
+        {open ? "Less" : "More"}
       </button>
       {open && (
         <div className={`${styles.detail} fade`}>

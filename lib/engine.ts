@@ -183,11 +183,14 @@ export interface GuidanceLine {
 }
 
 /**
- * The result shape: ONE anchor loud, a supporting trio quiet.
+ * The result shape: ONE anchor loud, a supporting quartet quiet.
  *
  *   anchor — the single small frictionless thing for the morning (designed for
  *            the weak-willed morning: one kind ask, no willpower needed).
- *   eat / breath / move — sit quieter beneath it.
+ *   eat / ritual / breath / move — sit quieter beneath it.
+ *
+ * `ritual` is a distinct daily-routine (dinacharya) element — kept different
+ * from the anchor so the two don't echo.
  */
 export interface Guidance {
   /** A short focus, e.g. "Ground & Warm". */
@@ -196,8 +199,9 @@ export interface Guidance {
   readonly readout: string;
   /** The loud, single anchor for the morning. */
   readonly anchor: GuidanceLine;
-  /** The quiet supporting trio. */
+  /** The quiet supporting set: Eat / Ritual / Breath / Move. */
   readonly eat: GuidanceLine;
+  readonly ritual: GuidanceLine;
   readonly breath: GuidanceLine;
   readonly move: GuidanceLine;
 }
@@ -316,11 +320,13 @@ function dedupe<T>(items: readonly T[]): T[] {
 // those as certain. We use the classical-grounded choices (sunflower/sandalwood
 // for Pitta; less-or-no oil for Kapha) so nothing here over-claims.
 
-/** The shape of a single cluster's guidance, before the read-out is computed. */
+/** The shape of a single cluster's guidance, before the read-out is computed.
+ *  `ritual` is a dinacharya (daily-routine) element, kept distinct from anchor. */
 interface ClusterContent {
   readonly focus: string;
   readonly anchor: GuidanceLine;
   readonly eat: GuidanceLine;
+  readonly ritual: GuidanceLine;
   readonly breath: GuidanceLine;
   readonly move: GuidanceLine;
 }
@@ -345,6 +351,15 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "stewed apple or pear, a little ghee — not a cold raw salad. Sweet, sour " +
         "and salt tastes settle wind.",
       source: "after Lad, Self-Healing Table 5, pp. 82–83; rasa AH Su. 1.14",
+    },
+    ritual: {
+      text: "Scrape your tongue, then a glass of warm water — keep the morning steady and unhurried.",
+      detail:
+        "Wind is mobile and irregular, so a steady, predictable routine is itself " +
+        "pacifying. Scraping the tongue clears the night's coating (āma); warm water " +
+        "wakes digestion and the bowels gently. Same anchors each morning give wind " +
+        "the walls it needs.",
+      source: "dinacharya, AH Su. 2.2–3; warm water Lad, Self-Healing p. 100",
     },
     breath: {
       text: "Nadi Shodhana — slow alternate-nostril breathing, to steady.",
@@ -383,6 +398,16 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "cooling oil like sunflower or sandalwood suits fire; coconut is common in " +
         "modern practice but worth confirming with a practitioner.)",
       source: "after Lad, Self-Healing Table 5 & Diet p. 80; rasa AH Su. 1.14",
+    },
+    ritual: {
+      text: "Oil-pulling or a cool-water swish, then scrape your tongue — a calm, unhurried start.",
+      detail:
+        "Gandūṣa — holding and swishing warm water or a little oil in the mouth — is " +
+        "the classical root of oil-pulling; followed by scraping the tongue. A slow, " +
+        "cooling morning ritual suits fire's heat and sharpness. (Sunflower or coconut " +
+        "oil are cooling choices — coconut is common in modern practice, worth " +
+        "confirming with a practitioner.)",
+      source: "gandūṣa AH Su. 2.6; tongue scraping AH Su. 2.2–3",
     },
     breath: {
       text: "Sheetali — the cooling breath.",
@@ -423,6 +448,15 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "weigh it down.",
       source: "after Lad, Self-Healing Table 5 & Diet p. 80; rasa AH Su. 1.14",
     },
+    ritual: {
+      text: "Scrape your tongue, then a brisk dry rub before a warm shower — wake the body up.",
+      detail:
+        "Earth is heavy and oily, so a dry, stimulating rub (udvartana) is the classical " +
+        "answer — it lightens and rouses, the opposite of oiling. A vigorous towel rub " +
+        "before a warm shower does the same. Skip oil massage when heaviness or " +
+        "congestion is high.",
+      source: "udvartana AH Su. 2.15; abhyanga caveat AH Su. 2.8–9",
+    },
     breath: {
       text: "Kapalabhati — gentle, energising breath.",
       detail:
@@ -459,6 +493,14 @@ const BALANCED: Guidance = {
       "(agni) steady — the balanced state Ayurveda calls sama.",
     source: "after Lad, Self-Healing, Diet pp. 80–81; agni AH Su. 1.7½",
   },
+  ritual: {
+    text: "Keep the morning rhythm that already serves you — tongue scraping, a glass of warm water.",
+    detail:
+      "Nothing is aggravated, so the work is simply to keep the steady daily routine " +
+      "(dinacharya) going. Scraping the tongue and warm water on waking are gentle " +
+      "anchors that suit everyone.",
+    source: "dinacharya, AH Su. 2.2–3; warm water Lad, Self-Healing p. 100",
+  },
   breath: {
     text: "A few slow breaths, simply to arrive.",
     detail: "No correction needed — just a moment to settle into the morning.",
@@ -479,6 +521,7 @@ interface MixedContent {
   readonly focus: string;
   readonly anchor: GuidanceLine;
   readonly eat: GuidanceLine;
+  readonly ritual: GuidanceLine;
 }
 
 const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
@@ -502,6 +545,14 @@ const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
         "wind) and not hot-spicy-sour (feeds fire). Warm, soft, gently sweet, cooked.",
       source: "knowledge: Vāta+Pitta overlap; rasa AH Su. 1.14",
     },
+    ritual: {
+      text: "Scrape your tongue, then warm water — keep the morning steady and unhurried.",
+      detail:
+        "A calm, predictable routine settles wind without heating fire. Scraping the " +
+        "tongue clears the night's coating (āma); warm water wakes digestion gently. " +
+        "Steady and unhurried serves both.",
+      source: "dinacharya, AH Su. 2.2–3; warm water Lad, Self-Healing p. 100",
+    },
   },
 
   // PITTA + KAPHA — light, dry, bitter & astringent, not heavy.
@@ -523,6 +574,14 @@ const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
         "cauliflower, light grains, beans, with spice used gently. Avoid both errors: " +
         "not hot-spicy-sour-salty (feeds fire) and not heavy-cold-oily-sweet (feeds earth).",
       source: "knowledge: Pitta+Kapha overlap; rasa AH Su. 1.14",
+    },
+    ritual: {
+      text: "Scrape your tongue, then a brisk dry rub before a warm-but-not-hot shower.",
+      detail:
+        "A dry, stimulating rub (udvartana) lightens earth's heaviness; keeping the " +
+        "water warm-but-not-hot avoids stoking fire. Light and rousing without heat — " +
+        "the common ground for this pair.",
+      source: "udvartana AH Su. 2.15; tongue scraping AH Su. 2.2–3",
     },
   },
 
@@ -546,6 +605,14 @@ const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
         "earth) — moderate oil, generous spice. Avoid both errors: not cold-raw-dry " +
         "and not heavy-oily-dense.",
       source: "knowledge: Vāta+Kapha overlap; rasa AH Su. 1.14",
+    },
+    ritual: {
+      text: "Scrape your tongue, then a glass of warm water — a steady, warming start.",
+      detail:
+        "Both wind and earth are cold, so a warm, steady morning suits both. Scraping " +
+        "the tongue clears the night's coating (āma); warm water wakes digestion. Keep " +
+        "it warm — never start the day cold.",
+      source: "dinacharya, AH Su. 2.2–3; warm water Lad, Self-Healing p. 100",
     },
   },
 };
@@ -594,6 +661,7 @@ function buildGuidance(
       readout,
       anchor: overlap.anchor,
       eat: overlap.eat,
+      ritual: overlap.ritual,
       breath: lead.breath,
       move: lead.move,
     };
@@ -609,6 +677,7 @@ function buildGuidance(
     readout,
     anchor: base.anchor,
     eat: base.eat,
+    ritual: base.ritual,
     breath: base.breath,
     move: base.move,
   };
