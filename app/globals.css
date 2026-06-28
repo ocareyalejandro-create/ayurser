@@ -1,0 +1,92 @@
+/* Design tokens — the locked palette. One accent (terra). No third brown.
+   Calm comes from restraint: two fonts, one accent, lots of space.
+   (Palette and feel ported from prototype/engine.html.) */
+
+:root {
+  /* Colour */
+  --ivory: #f6f1e8;
+  --char: #2f2925;
+  --terra: #b87a54; /* THE single accent */
+  --walnut: #6b4a34;
+  --sage: #98a27d;
+  --sand: #ddd1bc;
+  --card: #fcfaf4;
+
+  /* Type — fed by next/font in app/layout.tsx, with safe fallbacks. */
+  --serif: var(--font-cormorant), Georgia, serif;
+  --sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+
+  /* Spacing rhythm */
+  --space-1: 8px;
+  --space-2: 14px;
+  --space-3: 22px;
+  --space-4: 32px;
+  --space-5: 46px;
+
+  --radius-card: 22px;
+  --radius-opt: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: var(--ivory);
+  color: var(--char);
+  font-family: var(--sans);
+  font-weight: 300;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.serif {
+  font-family: var(--serif);
+}
+
+h1 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(34px, 9vw, 52px);
+  line-height: 1.05;
+  letter-spacing: 0.4px;
+}
+
+h2 {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(28px, 7vw, 40px);
+  line-height: 1.15;
+  letter-spacing: 0.3px;
+}
+
+/* The gentle fade every screen arrives on. */
+.fade {
+  animation: fade 0.6s ease both;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    animation: none;
+  }
+}

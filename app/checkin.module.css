@@ -1,0 +1,180 @@
+/* The one-minute check-in surface. Ported from prototype/engine.html's visual
+   language: generous spacing, soft cards, a quiet progress indicator. */
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 22px;
+}
+
+.stage {
+  width: 100%;
+  max-width: 520px;
+}
+
+.center {
+  text-align: center;
+}
+
+.kicker {
+  font-size: 11px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 18px;
+}
+
+.quiet {
+  font-family: var(--serif);
+  font-style: italic;
+  color: var(--sage);
+  font-size: 18px;
+}
+
+/* Progress: a quiet row of segments, the accent filling left-to-right. */
+.seg {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 46px;
+}
+
+.seg span {
+  flex: 1;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--sand);
+  transition: background 0.5s;
+}
+
+.seg span.on {
+  background: var(--terra);
+}
+
+.question {
+  margin-bottom: 32px;
+}
+
+.opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-top: 12px;
+  padding: 16px 20px;
+  border-radius: var(--radius-opt);
+  border: 1px solid var(--sand);
+  background: rgba(255, 255, 255, 0.5);
+  color: var(--char);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15.5px;
+  cursor: pointer;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.opt:hover {
+  border-color: var(--terra);
+  background: rgba(184, 122, 84, 0.07);
+}
+
+.opt:focus-visible {
+  outline: 2px solid var(--terra);
+  outline-offset: 2px;
+}
+
+.btn {
+  margin-top: 40px;
+  background: var(--terra);
+  color: var(--ivory);
+  border: none;
+  border-radius: 999px;
+  padding: 16px 40px;
+  font-family: var(--sans);
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px -16px rgba(107, 74, 52, 0.55);
+  transition: background 0.35s, transform 0.35s;
+}
+
+.btn:hover {
+  background: #a96d49;
+  transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--walnut);
+  outline-offset: 3px;
+}
+
+.back {
+  margin-top: 30px;
+  background: none;
+  border: none;
+  color: var(--walnut);
+  opacity: 0.5;
+  font-size: 13px;
+  font-family: var(--sans);
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.3s;
+}
+
+.back:hover {
+  opacity: 0.85;
+}
+
+/* The result card. */
+.card {
+  background: linear-gradient(168deg, #fcfaf4, #f7f1e6);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-card);
+  padding: 46px 40px 34px;
+  box-shadow: 0 36px 70px -38px rgba(107, 74, 52, 0.4);
+}
+
+.cardHead {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.focus {
+  font-weight: 400;
+}
+
+.row {
+  display: flex;
+  gap: 18px;
+  padding: 18px 0;
+  border-top: 1px solid rgba(221, 209, 188, 0.8);
+}
+
+.lab {
+  width: 54px;
+  flex: none;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sage);
+  padding-top: 4px;
+}
+
+.body {
+  font-family: var(--serif);
+  font-size: 20px;
+  line-height: 1.4;
+  color: #3a322c;
+}
+
+.foot {
+  text-align: center;
+  font-size: 10.5px;
+  color: #a89c8d;
+  line-height: 1.6;
+  margin-top: 26px;
+}
+
+.again {
+  text-align: center;
+}
