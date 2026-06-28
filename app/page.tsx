@@ -85,25 +85,52 @@ export default function CheckInPage() {
   );
 }
 
+/** The tree-of-life mark, drawn inline (ported from the design comp's SVG).
+ *  No raster asset needed — calm line art that scales and tints from CSS. */
+function TreeMark({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 100 100"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      stroke="#6B4A34"
+      strokeWidth={1.4}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <circle cx="50" cy="50" r="46" strokeWidth={1.1} />
+      <path d="M26 67 Q50 55 74 67 Q50 80 26 67 Z" strokeWidth={1.2} />
+      <path d="M50 41 Q29 49 27 65" />
+      <path d="M50 41 Q71 49 73 65" />
+      <path d="M50 36 L50 63" strokeWidth={1} />
+      <circle cx="50" cy="27" r="5.4" fill="#6B4A34" stroke="none" />
+      {[39, 43.5, 48, 52.5, 57, 61.5].map((cy) => (
+        <circle key={cy} cx="50" cy={cy} r="1.4" fill="#8C6236" stroke="none" />
+      ))}
+    </svg>
+  );
+}
+
+/** Screen 1 — the settling open. A soft beat, the mark breathing, then Begin. */
 function Intro({ onBegin }: { onBegin: () => void }) {
   return (
     <div className={`${styles.center} fade`}>
-      <p className={styles.kicker}>Ayurser</p>
-      <h1 className="serif">
-        How are you
-        <br />
-        today?
-      </h1>
-      <p className={styles.quiet} style={{ marginTop: 18 }}>
-        A one-minute check-in.
-      </p>
+      <TreeMark className={styles.settleMark} />
+      <p className={styles.introWordmark}>Ayurser</p>
+      <h1 className="serif">How are you today?</h1>
+      <p className={styles.lede}>A one-minute check-in. Take a slow breath in.</p>
       <button className={styles.btn} onClick={onBegin}>
-        Begin
+        Begin today&rsquo;s check-in
       </button>
     </div>
   );
 }
 
+const STEP_WORDS = ["One", "Two", "Three", "Four", "Five"] as const;
+
+/** Screen 2 — one of our five real questions, quiet progress, gentle back. */
 function QuestionView({
   step,
   onChoose,
@@ -115,21 +142,26 @@ function QuestionView({
 }) {
   const question = QUESTIONS[step]!;
   return (
-    <div className="fade" key={step}>
+    <div className="rise" key={step}>
       <div className={styles.seg} aria-hidden>
         {QUESTIONS.map((q, i) => (
-          <span key={q.key} className={i <= step ? styles.on : undefined} />
+          <span
+            key={q.key}
+            className={i === step ? styles.active : i < step ? styles.on : undefined}
+          />
         ))}
       </div>
-      <p className={styles.kicker}>
-        Question {step + 1} of {QUESTIONS.length}
+      <p className={styles.stepLabel}>
+        {STEP_WORDS[step]} of {QUESTIONS.length}
       </p>
       <h2 className={`serif ${styles.question}`}>{question.prompt}</h2>
-      {question.options.map((option, i) => (
-        <button key={option.label} className={styles.opt} onClick={() => onChoose(step, i)}>
-          {option.label}
-        </button>
-      ))}
+      <div className={styles.options}>
+        {question.options.map((option, i) => (
+          <button key={option.label} className={styles.opt} onClick={() => onChoose(step, i)}>
+            {option.label}
+          </button>
+        ))}
+      </div>
       <div>
         <button className={styles.back} onClick={onBack}>
           &larr;&nbsp;&nbsp;Back
@@ -139,110 +171,131 @@ function QuestionView({
   );
 }
 
+/** Screen 3 — the result: read-out, one loud anchor, the quiet quartet, the
+ *  epigraph, and the separated disclaimer. Plus the Wisdom card + teaser. */
 function ResultView({ result, onAgain }: { result: Result; onAgain: () => void }) {
   const { guidance } = result;
+  const [wisdomOpen, setWisdomOpen] = useState(false);
+
   return (
     <div className="fade">
       <div className={styles.card}>
-        <div className={styles.cardHead}>
-          <p className={styles.kicker}>Today</p>
-          <h2 className={`serif ${styles.focus}`}>{guidance.focus}</h2>
-          <p className={styles.quiet} style={{ marginTop: 14 }}>
-            {guidance.readout}
-          </p>
+        {/* The read-out — weather, not a label. */}
+        <p className={styles.readKicker}>Today&rsquo;s reading</p>
+        <p className={styles.readout}>{guidance.readout}</p>
+
+        {/* ONE anchor, loud, in its own warm panel. */}
+        <div className={styles.anchor}>
+          <p className={styles.anchorKicker}>One thing today</p>
+          <p className={styles.anchorText}>{guidance.anchor.text}</p>
+          <Detail line={guidance.anchor} />
         </div>
 
-        {/* ONE anchor, loud. The single frictionless thing for the morning. */}
-        <Anchor line={guidance.anchor} />
-
         {/* The supporting quartet, quiet. */}
-        <GuidanceRow label="Eat" line={guidance.eat} />
-        <GuidanceRow label="Ritual" line={guidance.ritual} />
-        <GuidanceRow label="Breath" line={guidance.breath} />
-        <GuidanceRow label="Move" line={guidance.move} />
+        <div className={styles.sections}>
+          <GuidanceRow label="Eat" line={guidance.eat} />
+          <GuidanceRow label="Ritual" line={guidance.ritual} />
+          <GuidanceRow label="Breath" line={guidance.breath} />
+          <GuidanceRow label="Move" line={guidance.move} />
+        </div>
 
-        {/* SEAM: the opt-in "why did we ask?" learn card lands here in a later
-            phase. Experience first, explanation second — not built now. */}
-
-        {/* Wisdom, set as wisdom: a quiet serif epigraph with its attribution
-            small beneath. Treated with grace, not as fine print. */}
+        {/* Wisdom, set as wisdom: a quiet serif epigraph, room to breathe. */}
         <figure className={styles.epigraph}>
-          <blockquote className={`serif ${styles.epigraphText}`}>{EPIGRAPH.text}</blockquote>
-          <figcaption className={styles.epigraphCite}>— {EPIGRAPH.attribution}</figcaption>
+          <blockquote className={styles.epigraphText}>&ldquo;{EPIGRAPH.text}&rdquo;</blockquote>
+          <figcaption className={styles.epigraphCite}>{EPIGRAPH.attribution}</figcaption>
         </figure>
+
+        {/* The legal note: separate, smaller, muted — clearly the footnote. */}
+        <p className={styles.disclaimer}>{DISCLAIMER}</p>
       </div>
 
-      {/* The legal note: separate, smaller, muted — clearly the footnote. */}
-      <p className={styles.disclaimer}>{DISCLAIMER}</p>
+      {/* The opt-in "Wisdom" card — the dosha explainer lives BEHIND this tap,
+          never up front. Experience first, explanation second. */}
+      <div className={styles.wisdom}>
+        <button
+          type="button"
+          className={styles.wisdomToggle}
+          aria-expanded={wisdomOpen}
+          onClick={() => setWisdomOpen((v) => !v)}
+        >
+          <span className={styles.wisdomTitle}>Wisdom — why we asked those questions</span>
+          <span className={styles.wisdomCaret}>{wisdomOpen ? "–" : "+"}</span>
+        </button>
+        {wisdomOpen && (
+          <div className={`${styles.wisdomBody} fade`}>
+            <p>
+              Ayurveda reads the body through its qualities. Sleep, energy, the body,
+              digestion and the mind are five quiet windows onto how you&rsquo;re faring
+              right now.
+            </p>
+            <p>
+              When several lean dry and light, the day reads <em>wind-like</em> (Vata);
+              warm and sharp reads <em>fire-like</em> (Pitta); heavy and slow,{" "}
+              <em>earth-like</em> (Kapha). These three forces move through all of us —
+              you&rsquo;re a blend, with one or two that tend to lead.
+            </p>
+            <p>
+              Your <em>Prakriti</em> is your nature — the constitution you were born with.
+              Your <em>Vikriti</em> is your weather — how that nature is faring today. We
+              read the weather; we won&rsquo;t pin your nature from a few taps. That&rsquo;s
+              a practitioner&rsquo;s trained eye.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Practitioner teaser — kept, honestly "coming soon". */}
+      <div className={styles.teaser}>
+        <div className={styles.teaserLinks}>
+          <span className={styles.teaserLink}>Learn</span>
+          <span className={styles.teaserDot} aria-hidden />
+          <span className={styles.teaserLink}>Find a practitioner</span>
+        </div>
+        <p className={styles.teaserSoon}>Coming soon</p>
+      </div>
 
       <div className={styles.again}>
         <button className={styles.btn} onClick={onAgain}>
-          Again
+          Done
         </button>
       </div>
     </div>
   );
 }
 
-/** The loud anchor: the one thing to do this morning, with tappable depth. */
-function Anchor({ line }: { line: GuidanceLine }) {
-  const why = useWhy();
-  return (
-    <div className={styles.anchor}>
-      <p className={styles.anchorKicker}>One thing</p>
-      <p className={`serif ${styles.anchorText}`}>{line.text}</p>
-      <WhyToggle line={line} {...why} />
-    </div>
-  );
-}
-
 /** A quiet supporting line: Eat / Ritual / Breath / Move, with tappable depth. */
 function GuidanceRow({ label, line }: { label: string; line: GuidanceLine }) {
-  const why = useWhy();
   return (
     <div className={styles.row}>
       <div className={styles.lab}>{label}</div>
       <div className={styles.body}>
-        {line.text}
-        <WhyToggle line={line} {...why} />
+        <p className={styles.bodyText}>{line.text}</p>
+        <Detail line={line} />
       </div>
     </div>
   );
 }
 
-/** Local open/closed state for one expandable depth panel. */
-function useWhy() {
-  const [open, setOpen] = useState(false);
-  return { open, toggle: () => setOpen((v) => !v) };
-}
-
 /**
  * The restrained "More" affordance. Hidden until tapped: a subtle underlined
- * link reveals the paraphrased detail + its attribution. No clutter, no jargon.
+ * accent link reveals the paraphrased detail + its citation. No clutter.
  */
-function WhyToggle({
-  line,
-  open,
-  toggle,
-}: {
-  line: GuidanceLine;
-  open: boolean;
-  toggle: () => void;
-}) {
+function Detail({ line }: { line: GuidanceLine }) {
+  const [open, setOpen] = useState(false);
   return (
     <>
       <button
         type="button"
-        className={styles.why}
+        className={styles.more}
         aria-expanded={open}
-        onClick={toggle}
+        onClick={() => setOpen((v) => !v)}
       >
         {open ? "Less" : "More"}
       </button>
       {open && (
         <div className={`${styles.detail} fade`}>
           <p className={styles.detailBody}>{line.detail}</p>
-          {line.source !== "—" && <p className={styles.detailSrc}>— {line.source}</p>}
+          {line.source !== "—" && <p className={styles.detailSrc}>{line.source}</p>}
         </div>
       )}
     </>
