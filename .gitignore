@@ -3,6 +3,19 @@ node_modules/
 .DS_Store
 .vercel
 
+# Next.js
+/.next/
+/out/
+next-env.d.ts
+
+# Env (never commit real keys; commit .env.local.example instead)
+.env*.local
+.env
+
+# Test / build
+/coverage
+*.tsbuildinfo
+
 # Source texts live locally only — never redistributed (copyright + repo size)
 references/*
 !references/README.md
