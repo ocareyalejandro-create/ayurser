@@ -165,15 +165,41 @@ export const CLUSTER_GLOSS: Readonly<Record<Cluster, { dosha: string; image: str
 
 export type Outcome = "balanced" | "single" | "mixed";
 
+/**
+ * One line of guidance, with tappable depth.
+ *
+ *   text   — the calm surface phrasing (what we say up front).
+ *   detail — the "why / how", revealed only on tap. Paraphrased, never copied.
+ *   source — the attribution, written as the knowledge file cites (e.g.
+ *            "after Lad; AH Su. 2"). We cite; we do not reproduce.
+ *
+ * Keeping detail + source on the line (not in a separate lookup) keeps the
+ * content map maintainable: recommendation and its evidence live together.
+ */
+export interface GuidanceLine {
+  readonly text: string;
+  readonly detail: string;
+  readonly source: string;
+}
+
+/**
+ * The result shape: ONE anchor loud, a supporting trio quiet.
+ *
+ *   anchor — the single small frictionless thing for the morning (designed for
+ *            the weak-willed morning: one kind ask, no willpower needed).
+ *   eat / breath / move — sit quieter beneath it.
+ */
 export interface Guidance {
   /** A short focus, e.g. "Ground & Warm". */
   readonly focus: string;
   /** The read-out — weather, not label. Leads with qualities. */
   readonly readout: string;
-  readonly eat: string;
-  readonly ritual: string;
-  readonly breath: string;
-  readonly move: string;
+  /** The loud, single anchor for the morning. */
+  readonly anchor: GuidanceLine;
+  /** The quiet supporting trio. */
+  readonly eat: GuidanceLine;
+  readonly breath: GuidanceLine;
+  readonly move: GuidanceLine;
 }
 
 export interface Result {
@@ -256,7 +282,7 @@ export function evaluate(answers: Answers): Result {
       speaking: [],
       offering: [],
       clusters: [],
-      guidance: GUIDANCE.balanced,
+      guidance: BALANCED,
     };
   }
 
@@ -280,44 +306,247 @@ function dedupe<T>(items: readonly T[]): T[] {
 }
 
 // --- Content layer -----------------------------------------------------------
-// Adapted from prototype/engine.html's CONTENT object (drawn from knowledge/),
-// re-expressed against the qualities-cluster model. One calm result, no bloat.
+// Drawn directly from knowledge/ayurveda.md. Every line carries its source.
+// The governing law is the safe ground (AH Su. 1.13½): a quality running high is
+// pacified by its opposite. Warm oil opposes Vata's dryness; cooling opposes
+// Pitta's heat; little oil + movement opposes Kapha's heaviness.
+//
+// Honesty note: where the knowledge flags "(confirm with practitioner)" — coconut
+// oil for Pitta, dry-brushing as the default Kapha practice — we do NOT present
+// those as certain. We use the classical-grounded choices (sunflower/sandalwood
+// for Pitta; less-or-no oil for Kapha) so nothing here over-claims.
 
-const CLUSTER_GUIDANCE: Readonly<Record<Cluster, Guidance>> = {
+/** The shape of a single cluster's guidance, before the read-out is computed. */
+interface ClusterContent {
+  readonly focus: string;
+  readonly anchor: GuidanceLine;
+  readonly eat: GuidanceLine;
+  readonly breath: GuidanceLine;
+  readonly move: GuidanceLine;
+}
+
+const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
+  // VATA — wind. Needs warm, cooked, moist, oily; grounding, steady.
   wind: {
     focus: "Ground & Warm",
-    readout: "",
-    eat: "Warm, cooked, lightly oiled food — oats with ghee, soups, stews.",
-    ritual: "Warm oil on the feet; a steady, unhurried routine.",
-    breath: "Nadi Shodhana — slow alternate-nostril breathing.",
-    move: "Slow, grounding movement; gentle forward folds.",
+    anchor: {
+      text: "Warm sesame oil on the soles of your feet.",
+      detail:
+        "Sesame oil, gently warmed, on the soles at night — heavy and warming, " +
+        "the exact opposite of wind's dry, cold, mobile qualities. A tiny, " +
+        "low-effort ritual that calms the mind and settles you toward sleep.",
+      source: "after Lad, Self-Healing p. 102; abhyanga AH Su. 2.8–9",
+    },
+    eat: {
+      text: "Warm, cooked, moist, lightly oiled food — soups, stewed fruit, oats with ghee.",
+      detail:
+        "Wind is dry, cold and light, so warm-cooked-moist-oily food pacifies it " +
+        "and raw-cold-dry food feeds it. Favour cooked grains, soups, warm milk, " +
+        "stewed apple or pear, a little ghee — not a cold raw salad. Sweet, sour " +
+        "and salt tastes settle wind.",
+      source: "after Lad, Self-Healing Table 5, pp. 82–83; rasa AH Su. 1.14",
+    },
+    breath: {
+      text: "Nadi Shodhana — slow alternate-nostril breathing, to steady.",
+      detail:
+        "Breathing gently through one nostril then the other, evenly and unhurried. " +
+        "A steadying breath for a scattered, mobile morning. Keep it slow — avoid " +
+        "fast or forceful breath when wind is high.",
+      source: "yoga–Ayurveda synthesis (Frawley, Yoga & Ayurveda); to be deepened",
+    },
+    move: {
+      text: "Slow, grounding movement — gentle forward folds, a steady walk.",
+      detail:
+        "Wind asks for steadiness over intensity: slow, stable, grounding shapes " +
+        "and a consistent rhythm rather than anything fast or jarring.",
+      source: "yoga–Ayurveda synthesis (Frawley, Yoga & Ayurveda); to be deepened",
+    },
   },
+
+  // PITTA — fire. Needs cooling, sweet, bitter, astringent; calm, shade.
   fire: {
     focus: "Cool & Soften",
-    readout: "",
-    eat: "Cooling foods — cucumber, coconut, mint, sweet fruit. Less heat and spice.",
-    ritual: "Shade, a little rose water, an unhurried walk.",
-    breath: "Sheetali — the cooling breath.",
-    move: "Easy and non-competitive — gentle twists, a swim if you can.",
+    anchor: {
+      text: "Find shade and slow down before the heat of the day.",
+      detail:
+        "Fire is hot and sharp, so coolness and calm pacify it. Step out of the " +
+        "midday sun, let the pace ease, save hard effort for the cooler afternoon. " +
+        "A hungry fire turns sharp — don't skip meals.",
+      source: "after Lad, Self-Healing, Diet p. 80; cooling potency AH Su. 1",
+    },
+    eat: {
+      text: "Cooling, sweet and bitter food — cucumber, leafy greens, sweet ripe fruit. Less heat and spice.",
+      detail:
+        "Sweet, bitter and astringent tastes cool fire; sour, salty and pungent " +
+        "ones heat it. Favour sweet ripe fruit, leafy greens, cucumber, fennel, " +
+        "coriander, mint. Ease off chili, garlic, sour and fermented food. (A " +
+        "cooling oil like sunflower or sandalwood suits fire; coconut is common in " +
+        "modern practice but worth confirming with a practitioner.)",
+      source: "after Lad, Self-Healing Table 5 & Diet p. 80; rasa AH Su. 1.14",
+    },
+    breath: {
+      text: "Sheetali — the cooling breath.",
+      detail:
+        "A cooling breath: drawing the inhale across the tongue or through pursed " +
+        "lips, so the air feels cool, then breathing out softly. Eases heat and " +
+        "sharpness. A clear plain description for now — the how-to deepens later.",
+      source: "yoga–Ayurveda synthesis (Frawley, Yoga & Ayurveda); to be deepened",
+    },
+    move: {
+      text: "Easy and non-competitive — gentle twists, a swim if you can.",
+      detail:
+        "Fire asks for ease over striving: cooling, unhurried, non-competitive " +
+        "movement, away from midday heat and overexertion.",
+      source: "yoga–Ayurveda synthesis (Frawley, Yoga & Ayurveda); to be deepened",
+    },
   },
+
+  // KAPHA — earth. Needs light, warm, dry, well-spiced; less oil; movement.
   earth: {
     focus: "Stir & Lighten",
-    readout: "",
-    eat: "Light, warm, spiced food. Skip the heavy and the sweet.",
-    ritual: "Dry brushing before a warm shower; open a window.",
-    breath: "Kapalabhati — gentle, energising breath.",
-    move: "Brisk movement — a few sun salutations to begin the day.",
+    anchor: {
+      text: "Move first thing — don't linger in bed.",
+      detail:
+        "The early morning is Kapha time — heavy and slow — so movement is the " +
+        "remedy: it breaks the heaviness and gets you going. Earth is the one type " +
+        "that can do well to skip a heavy breakfast; eating in Kapha hours adds more " +
+        "Kapha.",
+      source: "after Lad, Self-Healing pp. 104; dosha clock AH Su. 1.6½–7½",
+    },
+    eat: {
+      text: "Light, warm, dry, well-spiced food — go easy on oil, heavy and sweet.",
+      detail:
+        "Earth is heavy, cold, oily and slow, so light-warm-dry-spiced food " +
+        "pacifies it. Favour pungent and bitter vegetables, light grains (barley, " +
+        "millet), and plenty of warming spice — ginger, black pepper, turmeric. " +
+        "Pungent, bitter and astringent tastes lighten earth; sweet, sour and salt " +
+        "weigh it down.",
+      source: "after Lad, Self-Healing Table 5 & Diet p. 80; rasa AH Su. 1.14",
+    },
+    breath: {
+      text: "Kapalabhati — gentle, energising breath.",
+      detail:
+        "A light, energising breath: short active exhales through the nose with a " +
+        "passive inhale between. Warming and rousing for a heavy, slow morning. Keep " +
+        "it gentle. A plain description for now — the how-to deepens later.",
+      source: "yoga–Ayurveda synthesis (Frawley, Yoga & Ayurveda); to be deepened",
+    },
+    move: {
+      text: "Brisk, warming movement — a few sun salutations to begin the day.",
+      detail:
+        "Earth asks for stimulation and warmth: vigorous, lifting, heat-building " +
+        "movement to clear heaviness and build momentum.",
+      source: "yoga–Ayurveda synthesis (Frawley, Yoga & Ayurveda); to be deepened",
+    },
   },
 };
 
-const GUIDANCE: Readonly<Record<"balanced", Guidance>> = {
-  balanced: {
-    focus: "In Balance",
-    readout: "In balance — nothing pulling you off centre today.",
-    eat: "Eat as you naturally would; favour warm, fresh, simple food.",
-    ritual: "Keep the rhythms that are serving you.",
-    breath: "A few slow breaths, simply to arrive.",
-    move: "Move in whatever way feels good today.",
+/** The balanced outcome — a first-class, honest result. */
+const BALANCED: Guidance = {
+  focus: "In Balance",
+  readout: "In balance — nothing pulling you off centre today.",
+  anchor: {
+    text: "A few slow breaths, simply to arrive — then go live your day.",
+    detail:
+      "Nothing is running high today, so there is nothing to correct. The kind " +
+      "move is to keep the rhythms already serving you and step back into the day.",
+    source: "the governing law, AH Su. 1.13½ — opposites only where a quality runs high",
+  },
+  eat: {
+    text: "Eat as you naturally would; favour warm, fresh, simple food.",
+    detail:
+      "With nothing aggravated, warm, fresh, freshly cooked food keeps digestion " +
+      "(agni) steady — the balanced state Ayurveda calls sama.",
+    source: "after Lad, Self-Healing, Diet pp. 80–81; agni AH Su. 1.7½",
+  },
+  breath: {
+    text: "A few slow breaths, simply to arrive.",
+    detail: "No correction needed — just a moment to settle into the morning.",
+    source: "—",
+  },
+  move: {
+    text: "Move in whatever way feels good today.",
+    detail: "Balanced means free to choose; follow what your body asks for.",
+    source: "—",
+  },
+};
+
+/** Mixed-state overlaps — the honest synthesis, NOT two lists piled together.
+ *  Keyed by the unordered pair of clusters. Each pacifies BOTH without
+ *  aggravating either (knowledge/ayurveda.md → "Mixed states — honest overlaps").
+ *  The specific menu calls are reasoned synthesis — flagged for a practitioner. */
+interface MixedContent {
+  readonly focus: string;
+  readonly anchor: GuidanceLine;
+  readonly eat: GuidanceLine;
+}
+
+const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
+  // VATA + PITTA — warm-not-hot, moist, mildly sweet, cooked.
+  "wind+fire": {
+    focus: "Warm, Soft & Sweet",
+    anchor: {
+      text: "Keep it warm, not hot — slow down without going cold.",
+      detail:
+        "Wind wants warmth, fire wants cool — opposite temperatures. The honest " +
+        "middle is warm-not-hot and unhurried: settle the wind without stoking the " +
+        "fire. (Worth a practitioner's eye on the specifics.)",
+      source: "knowledge: Vāta+Pitta overlap; AH Su. 1.13½",
+    },
+    eat: {
+      text: "Sweet, moist, cooked food at a warm — not hot, not iced — temperature.",
+      detail:
+        "Sweet taste pacifies both wind and fire, so it is the common ground. " +
+        "Favour cooked sweet grains, stewed sweet fruit, sweet cooked vegetables, a " +
+        "little ghee, coriander or fennel. Avoid both errors: not raw-cold-dry (feeds " +
+        "wind) and not hot-spicy-sour (feeds fire). Warm, soft, gently sweet, cooked.",
+      source: "knowledge: Vāta+Pitta overlap; rasa AH Su. 1.14",
+    },
+  },
+
+  // PITTA + KAPHA — light, dry, bitter & astringent, not heavy.
+  "fire+earth": {
+    focus: "Light, Dry & Bitter",
+    anchor: {
+      text: "Keep it light — lightness is the common ground.",
+      detail:
+        "Fire wants cool, earth wants warm — opposite temperatures — so aim " +
+        "warm-but-not-hot. The shared ground is lightness: both do best with food " +
+        "and habits that are light and not oily. (Worth a practitioner's eye.)",
+      source: "knowledge: Pitta+Kapha overlap; AH Su. 1.13½",
+    },
+    eat: {
+      text: "Light, dry, bitter and astringent food — leafy greens, light grains; gentle spice.",
+      detail:
+        "Bitter and astringent tastes pacify both fire and earth, and both want " +
+        "food that is light, not heavy and not oily. Favour leafy greens, broccoli, " +
+        "cauliflower, light grains, beans, with spice used gently. Avoid both errors: " +
+        "not hot-spicy-sour-salty (feeds fire) and not heavy-cold-oily-sweet (feeds earth).",
+      source: "knowledge: Pitta+Kapha overlap; rasa AH Su. 1.14",
+    },
+  },
+
+  // VATA + KAPHA — warm, light-but-nourishing, well-spiced, never cold.
+  "wind+earth": {
+    focus: "Warm & Well-Spiced",
+    anchor: {
+      text: "Keep it warm and well-spiced — never cold.",
+      detail:
+        "Both wind and earth are cold, so warmth and warming spices serve both — " +
+        "the easy common ground. Cold food is the worst call here; it feeds both at " +
+        "once. (Worth a practitioner's eye on the specifics.)",
+      source: "knowledge: Vāta+Kapha overlap; AH Su. 1.13½",
+    },
+    eat: {
+      text: "Warm, well-spiced, lightly nourishing food — spiced soups, cooked grains, ginger tea.",
+      detail:
+        "Warmth and warming spice (ginger, cumin, black pepper, turmeric) pacify " +
+        "both. The tension is texture: wind wants moist/oily, earth wants dry/light. " +
+        "So keep it warm and cooked (for wind) but not heavy, greasy or cold (for " +
+        "earth) — moderate oil, generous spice. Avoid both errors: not cold-raw-dry " +
+        "and not heavy-oily-dense.",
+      source: "knowledge: Vāta+Kapha overlap; rasa AH Su. 1.14",
+    },
   },
 };
 
@@ -335,6 +564,12 @@ const QUALITY_WORD: Readonly<Record<Quality, string>> = {
   dull: "dull",
 };
 
+/** Stable key for a cluster pair, independent of which spoke louder. */
+function mixedKey(a: Cluster, b: Cluster): string {
+  const order: Record<Cluster, number> = { wind: 0, fire: 1, earth: 2 };
+  return order[a] < order[b] ? `${a}+${b}` : `${b}+${a}`;
+}
+
 function buildGuidance(
   outcome: Outcome,
   clusters: readonly Cluster[],
@@ -344,30 +579,39 @@ function buildGuidance(
   const qualityPhrase = joinWords(qualityWords);
 
   if (outcome === "mixed") {
-    // Two clusters speak — say so honestly, and offer the overlap of their care.
+    // Two clusters speak — name both, and offer the overlap that pacifies BOTH.
     const [a, b] = [clusters[0]!, clusters[1]!];
-    const focus = `${CLUSTER_GUIDANCE[a].focus} · ${CLUSTER_GUIDANCE[b].focus}`;
+    const overlap = MIXED_OVERLAP[mixedKey(a, b)]!;
     const readout =
       `Today reads ${qualityPhrase} — two are speaking, ` +
       `${CLUSTER_GLOSS[a].image} and ${CLUSTER_GLOSS[b].image}. ` +
-      `We'll tend both, gently.`;
+      `We'll tend both at once, gently.`;
+    // Breath & move: lead with the louder cluster's practice (clusters are
+    // ordered strongest-first); both directions hold for a mixed morning.
+    const lead = CLUSTER_CONTENT[a];
     return {
-      focus,
+      focus: overlap.focus,
       readout,
-      // Lead with the steadier of the two clusters' lines; both directions hold.
-      eat: `${CLUSTER_GUIDANCE[a].eat} And: ${CLUSTER_GUIDANCE[b].eat}`,
-      ritual: CLUSTER_GUIDANCE[a].ritual,
-      breath: CLUSTER_GUIDANCE[a].breath,
-      move: CLUSTER_GUIDANCE[a].move,
+      anchor: overlap.anchor,
+      eat: overlap.eat,
+      breath: lead.breath,
+      move: lead.move,
     };
   }
 
   // Single cluster speaking.
   const cluster = clusters[0]!;
   const gloss = CLUSTER_GLOSS[cluster];
-  const base = CLUSTER_GUIDANCE[cluster];
+  const base = CLUSTER_CONTENT[cluster];
   const readout = `Today reads ${qualityPhrase} — a ${gloss.image}-like morning (${gloss.dosha}).`;
-  return { ...base, readout };
+  return {
+    focus: base.focus,
+    readout,
+    anchor: base.anchor,
+    eat: base.eat,
+    breath: base.breath,
+    move: base.move,
+  };
 }
 
 function joinWords(words: readonly string[]): string {

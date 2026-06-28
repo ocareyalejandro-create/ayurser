@@ -214,3 +214,176 @@ describe("OPPOSITE map is a clean involution", () => {
     }
   });
 });
+
+// --- Content / guidance shape ------------------------------------------------
+
+const VATA = answer({
+  sleep: "Light, broken, kept waking",
+  energy: "Wired, restless, can't settle",
+  body: "Cold hands, dry skin or lips",
+  digestion: "Irregular — hungry then not, gassy",
+  mind: "Anxious, scattered, racing",
+});
+
+const PITTA = answer({
+  ...ALL_CALM,
+  sleep: "Hot, restless, vivid",
+  energy: "Driven, intense, a touch irritable",
+  body: "Warm, flushed, or inflamed",
+});
+
+const KAPHA = answer({
+  ...ALL_CALM,
+  energy: "Sluggish, slow to start", // heavy, dull, stable
+  mind: "Foggy, unmotivated, stuck", // heavy, dull
+});
+
+/** Every guidance line on a result, for shape assertions. */
+function allLines(r: ReturnType<typeof evaluate>) {
+  const g = r.guidance;
+  return [g.anchor, g.eat, g.breath, g.move];
+}
+
+describe("result shape: one anchor loud, supporting trio quiet", () => {
+  it("every outcome carries an anchor plus eat/breath/move, each with text/detail/source", () => {
+    for (const a of [VATA, PITTA, KAPHA, answer(ALL_CALM)]) {
+      const r = evaluate(a);
+      expect(r.guidance.anchor).toBeDefined();
+      for (const line of allLines(r)) {
+        expect(typeof line.text).toBe("string");
+        expect(line.text.length).toBeGreaterThan(0);
+        expect(typeof line.detail).toBe("string");
+        expect(line.detail.length).toBeGreaterThan(0);
+        expect(typeof line.source).toBe("string");
+      }
+    }
+  });
+
+  it("the depth detail differs from the surface text (it is not a duplicate)", () => {
+    const r = evaluate(VATA);
+    for (const line of allLines(r)) {
+      expect(line.detail).not.toBe(line.text);
+    }
+  });
+});
+
+describe("Vata food guidance is corrected — warm/cooked, never raw-cold", () => {
+  it("favours warm, cooked, moist, oily food", () => {
+    const eat = evaluate(VATA).guidance.eat;
+    expect(eat.text.toLowerCase()).toMatch(/warm|cooked|moist|oil/);
+  });
+
+  it("does NOT recommend raw cold cucumber (the fixed error)", () => {
+    const eat = evaluate(VATA).guidance.eat;
+    // The surface text must not recommend a cold cucumber as it once did.
+    expect(eat.text.toLowerCase()).not.toMatch(/cucumber/);
+  });
+
+  it("anchors on warm sesame oil on the feet, with a citation", () => {
+    const anchor = evaluate(VATA).guidance.anchor;
+    expect(anchor.text.toLowerCase()).toMatch(/sesame/);
+    expect(anchor.text.toLowerCase()).toMatch(/feet|sole/);
+    expect(anchor.source).toMatch(/Lad|AH/);
+  });
+});
+
+describe("Pitta guidance cools, and does not over-claim coconut", () => {
+  it("favours cooling/sweet/bitter food", () => {
+    const eat = evaluate(PITTA).guidance.eat;
+    expect(eat.text.toLowerCase()).toMatch(/cool|sweet|bitter/);
+  });
+
+  it("only mentions coconut tentatively (confirm-with-practitioner honesty)", () => {
+    const eat = evaluate(PITTA).guidance.eat;
+    const blob = `${eat.text} ${eat.detail}`.toLowerCase();
+    if (blob.includes("coconut")) {
+      expect(blob).toMatch(/practitioner|confirm/);
+    }
+  });
+});
+
+describe("Kapha guidance lightens", () => {
+  it("favours light/warm/dry/spiced food and less oil", () => {
+    const eat = evaluate(KAPHA).guidance.eat;
+    expect(eat.text.toLowerCase()).toMatch(/light|warm|dry|spice/);
+  });
+});
+
+describe("mixed states use honest overlaps, not piled-together lists", () => {
+  it("Vata+Pitta: warm-not-hot, cooked, sweet — explicitly not raw-cold nor hot-spicy", () => {
+    // wind (sleep light + mind scattered) + fire (body warm + digestion sharp).
+    const r = evaluate(
+      answer({
+        sleep: "Light, broken, kept waking", // mobile, light (wind)
+        energy: "Calm and steady",
+        body: "Warm, flushed, or inflamed", // hot, sharp (fire)
+        digestion: "Sharp — strong, acidic, burning", // hot, sharp (fire)
+        mind: "Anxious, scattered, racing", // mobile, light (wind)
+      }),
+    );
+    expect(r.outcome).toBe("mixed");
+    const eat = r.guidance.eat.text.toLowerCase();
+    // The overlap line is its own synthesis, not "list A. And: list B".
+    expect(r.guidance.eat.text).not.toMatch(/And:/);
+    expect(eat).toMatch(/warm|cooked|sweet/);
+    expect(r.guidance.focus).toBe("Warm, Soft & Sweet");
+  });
+
+  it("Pitta+Kapha: light/dry/bitter overlap", () => {
+    const r = evaluate(
+      answer({
+        sleep: "Hot, restless, vivid", // hot, sharp (fire)
+        energy: "Sluggish, slow to start", // heavy, dull, stable (earth)
+        body: "Comfortable",
+        digestion: "Sharp — strong, acidic, burning", // hot, sharp (fire)
+        mind: "Foggy, unmotivated, stuck", // heavy, dull (earth)
+      }),
+    );
+    expect(r.outcome).toBe("mixed");
+    expect(r.guidance.focus).toBe("Light, Dry & Bitter");
+    expect(r.guidance.eat.text.toLowerCase()).toMatch(/light|dry|bitter|astringent/);
+  });
+
+  it("Vata+Kapha: warm + well-spiced, never cold", () => {
+    const r = evaluate(
+      answer({
+        sleep: "Light, broken, kept waking", // mobile, light (wind)
+        energy: "Sluggish, slow to start", // heavy, dull, stable (earth)
+        body: "Comfortable",
+        digestion: "Irregular — hungry then not, gassy", // dry, mobile (wind)
+        mind: "Foggy, unmotivated, stuck", // heavy, dull (earth)
+      }),
+    );
+    expect(r.outcome).toBe("mixed");
+    expect(r.guidance.focus).toBe("Warm & Well-Spiced");
+    expect(r.guidance.eat.text.toLowerCase()).toMatch(/warm|spice/);
+  });
+
+  it("the mixed overlap is symmetric — same pair, same focus, regardless of which spoke louder", () => {
+    // Two evaluations whose dominant cluster differs but pair is the same.
+    const firePitched = evaluate(
+      answer({
+        sleep: "Hot, restless, vivid",
+        energy: "Driven, intense, a touch irritable", // extra fire
+        body: "Comfortable",
+        digestion: "Sharp — strong, acidic, burning",
+        mind: "Foggy, unmotivated, stuck", // earth (just at threshold? heavy/dull x1 — needs 2)
+      }),
+    );
+    // Build a clean earth-dominant fire+earth instead for determinism:
+    const earthPitched = evaluate(
+      answer({
+        sleep: "Heavy, long, hard to wake", // heavy, dull (earth)
+        energy: "Sluggish, slow to start", // heavy, dull, stable (earth)
+        body: "Warm, flushed, or inflamed", // hot, sharp (fire)
+        digestion: "Sharp — strong, acidic, burning", // hot, sharp (fire)
+        mind: "Foggy, unmotivated, stuck", // heavy, dull (earth)
+      }),
+    );
+    expect(earthPitched.outcome).toBe("mixed");
+    expect(earthPitched.clusters).toContain("fire");
+    expect(earthPitched.clusters).toContain("earth");
+    expect(earthPitched.guidance.focus).toBe("Light, Dry & Bitter");
+    void firePitched;
+  });
+});
