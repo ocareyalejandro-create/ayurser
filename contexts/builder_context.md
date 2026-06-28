@@ -4,6 +4,7 @@
 - `app/` — Next.js 14 App Router. `globals.css` (design tokens), `layout.tsx` (next/font), `page.tsx` (the check-in, client component), `checkin.module.css`, `api/check-in/route.ts` (server-side save endpoint).
 - `lib/` — `engine.ts` (the heart, pure) + `engine.test.ts`; edges: `db.ts` (server Postgres), `device.ts`, `saveCheckIn.ts`.
 - `migrations/0001_check_ins.sql` — the journal's memory (plain Postgres).
+- `public/logo.png` — the real tree-of-life meditator logo (922×922 RGBA, TRANSPARENT bg), extracted from the design comp bundle. Rendered via `next/image`: large on the settle screen, small/faint (opacity .26) top-right of the result card.
 - `legacy/index.html` — the preserved static prototype (moved off root).
 - `prototype/`, `knowledge/`, `references/` (gitignored), `*.md` — left as-is. Reference for palette/voice/content.
 - `.env.local.example` — `DATABASE_URL` (SECRET, server-only; `POSTGRES_URL` fallback).
@@ -35,7 +36,8 @@
 
 ## Next Steps
 - Journal READ route (fetch a device's history by `(device_id, created_at desc)`) is the next persistence task — not built yet.
-- Possible later: name onboarding + returning-greeting + 3-screen first-run primer + swipe (all in the comp, deferred this pass). The "Learn"/"Find a practitioner" teaser is presentational only (no targets yet).
+- Possible later: name onboarding + returning-greeting + 3-screen first-run primer + swipe (all in the comp, deferred this pass). The "Wisdom"/"Find a practitioner" teaser is presentational only (no targets yet).
+- FLAG (UX redundancy): the bottom teaser nav word was renamed "Learn"→"Wisdom" per request, but the opt-in explainer card is ALSO titled "Wisdom" — so the result screen now has TWO "Wisdom" entry points (the working opt-in card + the non-functional teaser link). Reconcile later (e.g. teaser → "Learn the basics", or make the teaser "Wisdom" the actual entry to a future Wisdom/Learn surface and retitle the opt-in card).
 - Alex provisions the DB (Neon / Vercel Neon integration), sets `DATABASE_URL`, runs `migrations/0001_check_ins.sql`, restarts dev. Then decide merge.
 - Breath/Move depth honest-but-thin ("Frawley, *Yoga & Ayurveda* — to be deepened"); deepen later with real citations (no yoga reviewer yet).
 - Mixed `MIXED_OVERLAP` menu calls are reasoned synthesis — worth a practitioner pass. Later: opt-in learn card (seam in `page.tsx`), time-of-day weighting, cycle layer, pattern-noticing.
