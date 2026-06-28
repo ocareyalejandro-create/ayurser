@@ -86,6 +86,49 @@
   }
 }
 
+/* ---- Naming (first visit) --------------------------------------------------- */
+
+/* The logo on the naming screen — slightly smaller, still, matching the comp. */
+.namingMark {
+  width: 104px;
+  height: auto;
+  margin-bottom: 24px;
+}
+
+/* "What shall we call you?" — comp values: Cormorant 300, 40px, ls .3px. */
+.namingPrompt {
+  font-size: clamp(30px, 8vw, 40px);
+  font-weight: 300;
+  line-height: 1.18;
+  letter-spacing: 0.3px;
+  margin-bottom: 38px;
+}
+
+/* The single calm underlined field — comp values (Cormorant 26px, centered). */
+.nameInput {
+  font-family: var(--serif);
+  font-size: 26px;
+  text-align: center;
+  border: none;
+  border-bottom: 1px solid var(--sand);
+  background: transparent;
+  color: var(--char);
+  padding: 9px 4px;
+  width: 264px;
+  max-width: 100%;
+  outline: none;
+  transition: border-bottom-color 0.35s ease;
+}
+
+.nameInput::placeholder {
+  color: var(--sage);
+  opacity: 0.55;
+}
+
+.nameInput:focus {
+  border-bottom-color: var(--accent);
+}
+
 /* ---- Intro ------------------------------------------------------------------ */
 
 /* Full-height column: the content group centered, the teaser pinned bottom.
@@ -172,6 +215,13 @@
 .btn:focus-visible {
   outline: 2px solid var(--walnut);
   outline-offset: 3px;
+}
+
+/* Dimmed until ready (e.g. Continue before a name is entered). */
+.btn:disabled {
+  opacity: 0.36;
+  cursor: default;
+  pointer-events: none;
 }
 
 /* Quiet text "back" affordance. */

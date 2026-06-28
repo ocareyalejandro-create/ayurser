@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   QUESTIONS,
@@ -10,6 +10,7 @@ import {
   type GuidanceLine,
 } from "@/lib/engine";
 import { saveCheckIn } from "@/lib/saveCheckIn";
+import { getName, setName } from "@/lib/name";
 import styles from "./checkin.module.css";
 
 /**
@@ -35,13 +36,31 @@ const DISCLAIMER = "Lifestyle guidance inspired by Ayurveda — not medical advi
 
 /** The screens of the one minute. A small, explicit state machine. */
 type Screen =
+  | { kind: "loading" } // resolving the stored name on mount (no flash of the wrong screen)
+  | { kind: "naming" } // first visit: "What shall we call you?"
   | { kind: "intro" }
   | { kind: "question"; step: number }
   | { kind: "result"; result: Result };
 
 export default function CheckInPage() {
-  const [screen, setScreen] = useState<Screen>({ kind: "intro" });
+  const [screen, setScreen] = useState<Screen>({ kind: "loading" });
+  const [name, setNameState] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Answers>({});
+
+  // Resolve the stored name once, on the client. localStorage is browser-only,
+  // so we start in "loading" and pick naming vs intro after mount — no flash.
+  useEffect(() => {
+    const stored = getName();
+    setNameState(stored);
+    setScreen(stored ? { kind: "intro" } : { kind: "naming" });
+  }, []);
+
+  function submitName(raw: string) {
+    const cleaned = setName(raw); // tidies + persists; null if empty
+    if (!cleaned) return;
+    setNameState(cleaned);
+    setScreen({ kind: "intro" });
+  }
 
   function begin() {
     setAnswers({});
@@ -77,7 +96,8 @@ export default function CheckInPage() {
   return (
     <main className={styles.page}>
       <div className={styles.stage}>
-        {screen.kind === "intro" && <Intro onBegin={begin} />}
+        {screen.kind === "naming" && <Naming onSubmit={submitName} />}
+        {screen.kind === "intro" && <Intro name={name} onBegin={begin} />}
         {screen.kind === "question" && (
           <QuestionView
             step={screen.step}
@@ -93,10 +113,49 @@ export default function CheckInPage() {
   );
 }
 
-/** Screen 1 — the settling open. A soft beat, the logo breathing, then Begin.
- *  Full-height column: the content group sits centered, the teaser pinned to
- *  the bottom (matching the comp's home). */
-function Intro({ onBegin }: { onBegin: () => void }) {
+/** First visit — a single gentle field: "What shall we call you?" Matches the
+ *  comp's onboarding (logo, wordmark, serif prompt, underlined input, CTA). */
+function Naming({ onSubmit }: { onSubmit: (raw: string) => void }) {
+  const [value, setValue] = useState("");
+  const ready = value.trim().length > 0;
+
+  return (
+    <div className={`${styles.center} fade`}>
+      <Image
+        src={LOGO_SRC}
+        alt="Ayurser — the tree of life"
+        width={104}
+        height={104}
+        priority
+        className={styles.namingMark}
+      />
+      <p className={styles.introWordmark}>Ayurser</p>
+      <h2 className={`serif ${styles.namingPrompt}`}>What shall we call you?</h2>
+      <input
+        className={styles.nameInput}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && ready) onSubmit(value);
+        }}
+        placeholder="your name"
+        aria-label="Your name"
+        maxLength={40}
+        autoComplete="given-name"
+        autoFocus
+      />
+      <button className={styles.btn} onClick={() => onSubmit(value)} disabled={!ready}>
+        Continue
+      </button>
+    </div>
+  );
+}
+
+/** Screen 1 — the home / settling open. The greeting leads (big serif), with
+ *  "How do you feel today?" beneath (smaller sage italic). The logo breathes,
+ *  then Begin; the teaser is pinned to the bottom (matching the comp's home). */
+function Intro({ name, onBegin }: { name: string | null; onBegin: () => void }) {
+  const greeting = name ? `Welcome back, ${name}.` : "Welcome back.";
   return (
     <div className={`${styles.intro} fade`}>
       <div className={styles.introGroup}>
@@ -109,8 +168,8 @@ function Intro({ onBegin }: { onBegin: () => void }) {
           className={styles.settleMark}
         />
         <p className={styles.introWordmark}>Ayurser</p>
-        <h1 className={`serif ${styles.introHeading}`}>How do you feel today?</h1>
-        <p className={styles.lede}>A one-minute check-in. Take a slow breath in.</p>
+        <h1 className={`serif ${styles.introHeading}`}>{greeting}</h1>
+        <p className={styles.lede}>How do you feel today?</p>
         <button className={styles.btn} onClick={onBegin}>
           Begin today&rsquo;s check-in
         </button>
