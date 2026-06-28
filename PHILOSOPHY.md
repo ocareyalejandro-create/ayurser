@@ -14,6 +14,27 @@
 - **Human at the top** — the app guides; practitioners hold the authority.
   *Human practitioners > AI authority.* Always.
 
+More precisely: **a living health journal, inspired by Ayurveda.** Not an app that
+tells you who you are — a companion that helps you notice how you are *today*,
+understand why, and gently find your way back toward balance. Ayurveda is the lens it
+notices through, never a verdict it hands down. **A journal does not have to be *right* —
+only *honest*.** That is the whole difference, and it is the soul of this project.
+
+---
+
+## The one-minute morning
+
+The whole product is one moment: someone pauses for a minute and asks,
+*"How am I, really?"* — and is met, not measured.
+
+Our goal is **not to tell people who they are.** It is to help them **notice how they
+are today, understand why, and gently find the way back toward balance.** Not AI. Not
+doshas. Not scoring. Just that honest minute, protected.
+
+Everything we build serves that minute or it does not ship. The engine beneath may grow
+endlessly sophisticated; the minute must always stay **calm, simple, and almost
+effortless.** That balance is protected from day one.
+
 ---
 
 ## Individual-first — inclusion, not a wall
@@ -162,6 +183,32 @@ Constitution (Prakriti) is **not** the average of your bad days — repeated
 imbalance can be season or lifestyle, not nature. So what emerges is framed as
 **"your tendencies — what tends to pull you off balance,"** which is both
 truthful and, frankly, more useful than a fixed label.
+
+---
+
+## It learns — a journal, not a judge
+
+Over time the app should *remember*, and the check-in should *shrink*. After enough
+mornings it stops asking what it already knows — five questions become three, then one —
+until the honest minute takes ten seconds. This is "the app that sends you away," made
+literal: the reward for a steady life is to be asked less.
+
+And it begins to notice patterns — *"lately, on broken nights, your mornings tend to go
+dry and scattered."* This is the most powerful thing the app can do, and the most
+dangerous. Three laws keep it honest:
+
+- **Noticing, never verdict.** It says *"we've noticed… does that ring true?"*, shows its
+  evidence, holds it loosely, and lets you correct it. You stay *above* the app's reading
+  of you — *human at the top*, turned inward. The moment it says "you *are*" instead of
+  "we've noticed," it is lying.
+- **The shrinking check-in is never a cage.** Stability assumed is not stability
+  confirmed. The one-question morning always leaves a door — *"anything else today?"* —
+  and re-widens on its own, or after a rough patch. It must never stop noticing the very
+  change it exists to catch.
+- **Capture early, interpret later.** You cannot learn from data you threw away. Every
+  check-in is recorded from the very first morning; the *intelligence* on top arrives far
+  later. The substrate starts on day one — which is why the journal needs a real memory
+  (a database), not a pocket it forgets.
 
 ---
 
