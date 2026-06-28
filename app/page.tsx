@@ -1,7 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { QUESTIONS, evaluate, type Answers, type Result } from "@/lib/engine";
+import {
+  QUESTIONS,
+  evaluate,
+  type Answers,
+  type Result,
+  type GuidanceLine,
+} from "@/lib/engine";
 import { saveCheckIn } from "@/lib/saveCheckIn";
 import styles from "./checkin.module.css";
 
@@ -132,10 +138,13 @@ function ResultView({ result, onAgain }: { result: Result; onAgain: () => void }
           </p>
         </div>
 
-        <GuidanceRow label="Eat" text={guidance.eat} />
-        <GuidanceRow label="Ritual" text={guidance.ritual} />
-        <GuidanceRow label="Breath" text={guidance.breath} />
-        <GuidanceRow label="Move" text={guidance.move} />
+        {/* ONE anchor, loud. The single frictionless thing for the morning. */}
+        <Anchor line={guidance.anchor} />
+
+        {/* The supporting trio, quiet. */}
+        <GuidanceRow label="Eat" line={guidance.eat} />
+        <GuidanceRow label="Breath" line={guidance.breath} />
+        <GuidanceRow label="Move" line={guidance.move} />
 
         {/* SEAM: the opt-in "why did we ask?" learn card lands here in a later
             phase. Experience first, explanation second — not built now. */}
@@ -156,11 +165,67 @@ function ResultView({ result, onAgain }: { result: Result; onAgain: () => void }
   );
 }
 
-function GuidanceRow({ label, text }: { label: string; text: string }) {
+/** The loud anchor: the one thing to do this morning, with tappable depth. */
+function Anchor({ line }: { line: GuidanceLine }) {
+  const why = useWhy();
+  return (
+    <div className={styles.anchor}>
+      <p className={styles.anchorKicker}>One thing</p>
+      <p className={`serif ${styles.anchorText}`}>{line.text}</p>
+      <WhyToggle line={line} {...why} />
+    </div>
+  );
+}
+
+/** A quiet supporting line: Eat / Breath / Move, with tappable depth. */
+function GuidanceRow({ label, line }: { label: string; line: GuidanceLine }) {
+  const why = useWhy();
   return (
     <div className={styles.row}>
       <div className={styles.lab}>{label}</div>
-      <div className={styles.body}>{text}</div>
+      <div className={styles.body}>
+        {line.text}
+        <WhyToggle line={line} {...why} />
+      </div>
     </div>
+  );
+}
+
+/** Local open/closed state for one expandable "why?". */
+function useWhy() {
+  const [open, setOpen] = useState(false);
+  return { open, toggle: () => setOpen((v) => !v) };
+}
+
+/**
+ * The restrained "why?" affordance. Hidden until tapped: a subtle underlined
+ * link reveals the paraphrased detail + its attribution. No clutter, no jargon.
+ */
+function WhyToggle({
+  line,
+  open,
+  toggle,
+}: {
+  line: GuidanceLine;
+  open: boolean;
+  toggle: () => void;
+}) {
+  return (
+    <>
+      <button
+        type="button"
+        className={styles.why}
+        aria-expanded={open}
+        onClick={toggle}
+      >
+        {open ? "Less" : "Why?"}
+      </button>
+      {open && (
+        <div className={`${styles.detail} fade`}>
+          <p className={styles.detailBody}>{line.detail}</p>
+          {line.source !== "—" && <p className={styles.detailSrc}>— {line.source}</p>}
+        </div>
+      )}
+    </>
   );
 }
