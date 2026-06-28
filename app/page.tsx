@@ -106,7 +106,7 @@ function Intro({ onBegin }: { onBegin: () => void }) {
         className={styles.settleMark}
       />
       <p className={styles.introWordmark}>Ayurser</p>
-      <h1 className="serif">How are you today?</h1>
+      <h1 className="serif">How do you feel today?</h1>
       <p className={styles.lede}>A one-minute check-in. Take a slow breath in.</p>
       <button className={styles.btn} onClick={onBegin}>
         Begin today&rsquo;s check-in
