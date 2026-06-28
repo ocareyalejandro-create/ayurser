@@ -341,7 +341,7 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "Sesame oil, gently warmed, on the soles at night — heavy and warming, " +
         "the exact opposite of wind's dry, cold, mobile qualities. A tiny, " +
         "low-effort ritual that calms the mind and settles you toward sleep.",
-      source: "after Lad, Self-Healing p. 102; abhyanga AH Su. 2.8–9",
+      source: "Lad, *The Science of Self-Healing*, p. 102 · Aṣṭāṅga Hṛdaya, Sū. 2.8–9",
     },
     eat: {
       text: "Warm, cooked, moist, lightly oiled food — soups, stewed fruit, oats with ghee.",
@@ -350,7 +350,7 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "and raw-cold-dry food feeds it. Favour cooked grains, soups, warm milk, " +
         "stewed apple or pear, a little ghee — not a cold raw salad. Sweet, sour " +
         "and salt tastes settle wind.",
-      source: "after Lad, Self-Healing Table 5, pp. 82–83; rasa AH Su. 1.14",
+      source: "Lad, *The Science of Self-Healing*, Table 5, pp. 82–83 · Aṣṭāṅga Hṛdaya, Sū. 1.14",
     },
     ritual: {
       text: "Scrape your tongue, then a glass of warm water — keep the morning steady and unhurried.",
@@ -359,7 +359,7 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "pacifying. Scraping the tongue clears the night's coating (āma); warm water " +
         "wakes digestion and the bowels gently. Same anchors each morning give wind " +
         "the walls it needs.",
-      source: "dinacharya, AH Su. 2.2–3; warm water Lad, Self-Healing p. 100",
+      source: "Aṣṭāṅga Hṛdaya, Sū. 2.2–3 · Lad, *The Science of Self-Healing*, p. 100",
     },
     breath: {
       text: "Nadi Shodhana — slow alternate-nostril breathing, to steady.",
@@ -367,14 +367,14 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "Breathing gently through one nostril then the other, evenly and unhurried. " +
         "A steadying breath for a scattered, mobile morning. Keep it slow — avoid " +
         "fast or forceful breath when wind is high.",
-      source: "yoga–Ayurveda synthesis (Frawley, Yoga & Ayurveda); to be deepened",
+      source: "Frawley, *Yoga & Ayurveda* — to be deepened",
     },
     move: {
       text: "Slow, grounding movement — gentle forward folds, a steady walk.",
       detail:
         "Wind asks for steadiness over intensity: slow, stable, grounding shapes " +
         "and a consistent rhythm rather than anything fast or jarring.",
-      source: "yoga–Ayurveda synthesis (Frawley, Yoga & Ayurveda); to be deepened",
+      source: "Frawley, *Yoga & Ayurveda* — to be deepened",
     },
   },
 
@@ -387,7 +387,7 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "Fire is hot and sharp, so coolness and calm pacify it. Step out of the " +
         "midday sun, let the pace ease, save hard effort for the cooler afternoon. " +
         "A hungry fire turns sharp — don't skip meals.",
-      source: "after Lad, Self-Healing, Diet p. 80; cooling potency AH Su. 1",
+      source: "Lad, *The Science of Self-Healing*, Diet p. 80 · Aṣṭāṅga Hṛdaya, Sū. 1",
     },
     eat: {
       text: "Cooling, sweet and bitter food — cucumber, leafy greens, sweet ripe fruit. Less heat and spice.",
@@ -397,7 +397,7 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "coriander, mint. Ease off chili, garlic, sour and fermented food. (A " +
         "cooling oil like sunflower or sandalwood suits fire; coconut is common in " +
         "modern practice but worth confirming with a practitioner.)",
-      source: "after Lad, Self-Healing Table 5 & Diet p. 80; rasa AH Su. 1.14",
+      source: "Lad, *The Science of Self-Healing*, Table 5 & Diet p. 80 · Aṣṭāṅga Hṛdaya, Sū. 1.14",
     },
     ritual: {
       text: "Oil-pulling or a cool-water swish, then scrape your tongue — a calm, unhurried start.",
@@ -407,7 +407,7 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "cooling morning ritual suits fire's heat and sharpness. (Sunflower or coconut " +
         "oil are cooling choices — coconut is common in modern practice, worth " +
         "confirming with a practitioner.)",
-      source: "gandūṣa AH Su. 2.6; tongue scraping AH Su. 2.2–3",
+      source: "Aṣṭāṅga Hṛdaya, Sū. 2.6 · 2.2–3",
     },
     breath: {
       text: "Sheetali — the cooling breath.",
@@ -415,14 +415,14 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "A cooling breath: drawing the inhale across the tongue or through pursed " +
         "lips, so the air feels cool, then breathing out softly. Eases heat and " +
         "sharpness. A clear plain description for now — the how-to deepens later.",
-      source: "yoga–Ayurveda synthesis (Frawley, Yoga & Ayurveda); to be deepened",
+      source: "Frawley, *Yoga & Ayurveda* — to be deepened",
     },
     move: {
       text: "Easy and non-competitive — gentle twists, a swim if you can.",
       detail:
         "Fire asks for ease over striving: cooling, unhurried, non-competitive " +
         "movement, away from midday heat and overexertion.",
-      source: "yoga–Ayurveda synthesis (Frawley, Yoga & Ayurveda); to be deepened",
+      source: "Frawley, *Yoga & Ayurveda* — to be deepened",
     },
   },
 
@@ -436,7 +436,7 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "remedy: it breaks the heaviness and gets you going. Earth is the one type " +
         "that can do well to skip a heavy breakfast; eating in Kapha hours adds more " +
         "Kapha.",
-      source: "after Lad, Self-Healing pp. 104; dosha clock AH Su. 1.6½–7½",
+      source: "Lad, *The Science of Self-Healing*, p. 104 · Aṣṭāṅga Hṛdaya, Sū. 1.6½–7½",
     },
     eat: {
       text: "Light, warm, dry, well-spiced food — go easy on oil, heavy and sweet.",
@@ -446,7 +446,7 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "millet), and plenty of warming spice — ginger, black pepper, turmeric. " +
         "Pungent, bitter and astringent tastes lighten earth; sweet, sour and salt " +
         "weigh it down.",
-      source: "after Lad, Self-Healing Table 5 & Diet p. 80; rasa AH Su. 1.14",
+      source: "Lad, *The Science of Self-Healing*, Table 5 & Diet p. 80 · Aṣṭāṅga Hṛdaya, Sū. 1.14",
     },
     ritual: {
       text: "Scrape your tongue, then a brisk dry rub before a warm shower — wake the body up.",
@@ -455,7 +455,7 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "answer — it lightens and rouses, the opposite of oiling. A vigorous towel rub " +
         "before a warm shower does the same. Skip oil massage when heaviness or " +
         "congestion is high.",
-      source: "udvartana AH Su. 2.15; abhyanga caveat AH Su. 2.8–9",
+      source: "Aṣṭāṅga Hṛdaya, Sū. 2.15 · 2.8–9",
     },
     breath: {
       text: "Kapalabhati — gentle, energising breath.",
@@ -463,14 +463,14 @@ const CLUSTER_CONTENT: Readonly<Record<Cluster, ClusterContent>> = {
         "A light, energising breath: short active exhales through the nose with a " +
         "passive inhale between. Warming and rousing for a heavy, slow morning. Keep " +
         "it gentle. A plain description for now — the how-to deepens later.",
-      source: "yoga–Ayurveda synthesis (Frawley, Yoga & Ayurveda); to be deepened",
+      source: "Frawley, *Yoga & Ayurveda* — to be deepened",
     },
     move: {
       text: "Brisk, warming movement — a few sun salutations to begin the day.",
       detail:
         "Earth asks for stimulation and warmth: vigorous, lifting, heat-building " +
         "movement to clear heaviness and build momentum.",
-      source: "yoga–Ayurveda synthesis (Frawley, Yoga & Ayurveda); to be deepened",
+      source: "Frawley, *Yoga & Ayurveda* — to be deepened",
     },
   },
 };
@@ -484,14 +484,14 @@ const BALANCED: Guidance = {
     detail:
       "Nothing is running high today, so there is nothing to correct. The kind " +
       "move is to keep the rhythms already serving you and step back into the day.",
-    source: "the governing law, AH Su. 1.13½ — opposites only where a quality runs high",
+    source: "Aṣṭāṅga Hṛdaya, Sūtrasthāna 1.13½",
   },
   eat: {
     text: "Eat as you naturally would; favour warm, fresh, simple food.",
     detail:
       "With nothing aggravated, warm, fresh, freshly cooked food keeps digestion " +
       "(agni) steady — the balanced state Ayurveda calls sama.",
-    source: "after Lad, Self-Healing, Diet pp. 80–81; agni AH Su. 1.7½",
+    source: "Lad, *The Science of Self-Healing*, Diet pp. 80–81 · Aṣṭāṅga Hṛdaya, Sū. 1.7½",
   },
   ritual: {
     text: "Keep the morning rhythm that already serves you — tongue scraping, a glass of warm water.",
@@ -499,7 +499,7 @@ const BALANCED: Guidance = {
       "Nothing is aggravated, so the work is simply to keep the steady daily routine " +
       "(dinacharya) going. Scraping the tongue and warm water on waking are gentle " +
       "anchors that suit everyone.",
-    source: "dinacharya, AH Su. 2.2–3; warm water Lad, Self-Healing p. 100",
+    source: "Aṣṭāṅga Hṛdaya, Sū. 2.2–3 · Lad, *The Science of Self-Healing*, p. 100",
   },
   breath: {
     text: "A few slow breaths, simply to arrive.",
@@ -534,7 +534,7 @@ const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
         "Wind wants warmth, fire wants cool — opposite temperatures. The honest " +
         "middle is warm-not-hot and unhurried: settle the wind without stoking the " +
         "fire. (Worth a practitioner's eye on the specifics.)",
-      source: "knowledge: Vāta+Pitta overlap; AH Su. 1.13½",
+      source: "Aṣṭāṅga Hṛdaya, Sūtrasthāna 1.13½",
     },
     eat: {
       text: "Sweet, moist, cooked food at a warm — not hot, not iced — temperature.",
@@ -543,7 +543,7 @@ const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
         "Favour cooked sweet grains, stewed sweet fruit, sweet cooked vegetables, a " +
         "little ghee, coriander or fennel. Avoid both errors: not raw-cold-dry (feeds " +
         "wind) and not hot-spicy-sour (feeds fire). Warm, soft, gently sweet, cooked.",
-      source: "knowledge: Vāta+Pitta overlap; rasa AH Su. 1.14",
+      source: "Aṣṭāṅga Hṛdaya, Sū. 1.14",
     },
     ritual: {
       text: "Scrape your tongue, then warm water — keep the morning steady and unhurried.",
@@ -551,7 +551,7 @@ const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
         "A calm, predictable routine settles wind without heating fire. Scraping the " +
         "tongue clears the night's coating (āma); warm water wakes digestion gently. " +
         "Steady and unhurried serves both.",
-      source: "dinacharya, AH Su. 2.2–3; warm water Lad, Self-Healing p. 100",
+      source: "Aṣṭāṅga Hṛdaya, Sū. 2.2–3 · Lad, *The Science of Self-Healing*, p. 100",
     },
   },
 
@@ -564,7 +564,7 @@ const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
         "Fire wants cool, earth wants warm — opposite temperatures — so aim " +
         "warm-but-not-hot. The shared ground is lightness: both do best with food " +
         "and habits that are light and not oily. (Worth a practitioner's eye.)",
-      source: "knowledge: Pitta+Kapha overlap; AH Su. 1.13½",
+      source: "Aṣṭāṅga Hṛdaya, Sūtrasthāna 1.13½",
     },
     eat: {
       text: "Light, dry, bitter and astringent food — leafy greens, light grains; gentle spice.",
@@ -573,7 +573,7 @@ const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
         "food that is light, not heavy and not oily. Favour leafy greens, broccoli, " +
         "cauliflower, light grains, beans, with spice used gently. Avoid both errors: " +
         "not hot-spicy-sour-salty (feeds fire) and not heavy-cold-oily-sweet (feeds earth).",
-      source: "knowledge: Pitta+Kapha overlap; rasa AH Su. 1.14",
+      source: "Aṣṭāṅga Hṛdaya, Sū. 1.14",
     },
     ritual: {
       text: "Scrape your tongue, then a brisk dry rub before a warm-but-not-hot shower.",
@@ -581,7 +581,7 @@ const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
         "A dry, stimulating rub (udvartana) lightens earth's heaviness; keeping the " +
         "water warm-but-not-hot avoids stoking fire. Light and rousing without heat — " +
         "the common ground for this pair.",
-      source: "udvartana AH Su. 2.15; tongue scraping AH Su. 2.2–3",
+      source: "Aṣṭāṅga Hṛdaya, Sū. 2.15 · 2.2–3",
     },
   },
 
@@ -594,7 +594,7 @@ const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
         "Both wind and earth are cold, so warmth and warming spices serve both — " +
         "the easy common ground. Cold food is the worst call here; it feeds both at " +
         "once. (Worth a practitioner's eye on the specifics.)",
-      source: "knowledge: Vāta+Kapha overlap; AH Su. 1.13½",
+      source: "Aṣṭāṅga Hṛdaya, Sūtrasthāna 1.13½",
     },
     eat: {
       text: "Warm, well-spiced, lightly nourishing food — spiced soups, cooked grains, ginger tea.",
@@ -604,7 +604,7 @@ const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
         "So keep it warm and cooked (for wind) but not heavy, greasy or cold (for " +
         "earth) — moderate oil, generous spice. Avoid both errors: not cold-raw-dry " +
         "and not heavy-oily-dense.",
-      source: "knowledge: Vāta+Kapha overlap; rasa AH Su. 1.14",
+      source: "Aṣṭāṅga Hṛdaya, Sū. 1.14",
     },
     ritual: {
       text: "Scrape your tongue, then a glass of warm water — a steady, warming start.",
@@ -612,7 +612,7 @@ const MIXED_OVERLAP: Readonly<Record<string, MixedContent>> = {
         "Both wind and earth are cold, so a warm, steady morning suits both. Scraping " +
         "the tongue clears the night's coating (āma); warm water wakes digestion. Keep " +
         "it warm — never start the day cold.",
-      source: "dinacharya, AH Su. 2.2–3; warm water Lad, Self-Healing p. 100",
+      source: "Aṣṭāṅga Hṛdaya, Sū. 2.2–3 · Lad, *The Science of Self-Healing*, p. 100",
     },
   },
 };
