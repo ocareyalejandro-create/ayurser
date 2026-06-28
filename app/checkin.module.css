@@ -1,105 +1,123 @@
-/* The one-minute check-in surface. Ported from prototype/engine.html's visual
-   language: generous spacing, soft cards, a quiet progress indicator. */
+/* The one-minute check-in surface — re-skinned to the approved Claude Design
+   comp. Skin from the design; substance (engine + cited content) is ours.
+   Plain CSS modules, two fonts, one accent (--accent), generous air. */
 
 .page {
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px 22px;
+  padding: 56px 24px;
+  overflow: hidden;
+}
+
+/* The soft radial light the comp sets behind everything. */
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(130% 90% at 50% -10%, rgba(255, 255, 255, 0.6), transparent 55%);
 }
 
 .stage {
+  position: relative;
   width: 100%;
   max-width: 520px;
 }
 
 .center {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* The small uppercase kicker (wordmark / step labels). */
 .kicker {
   font-size: 11px;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--terra);
-  margin-bottom: 18px;
+  color: var(--walnut);
+  opacity: 0.7;
 }
 
+/* Quiet serif italic aside — the sage voice. */
 .quiet {
   font-family: var(--serif);
   font-style: italic;
   color: var(--sage);
-  font-size: 18px;
+  font-size: 20px;
+  line-height: 1.45;
 }
 
-/* Progress: a quiet row of segments, the accent filling left-to-right. */
-.seg {
+/* ---- Settling beat ---------------------------------------------------------- */
+
+.settle {
+  text-align: center;
   display: flex;
-  gap: 7px;
-  margin-bottom: 46px;
+  flex-direction: column;
+  align-items: center;
 }
 
-.seg span {
-  flex: 1;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--sand);
-  transition: background 0.5s;
-}
-
-.seg span.on {
-  background: var(--terra);
-}
-
-.question {
+.settleMark {
+  width: 96px;
+  height: 96px;
   margin-bottom: 32px;
+  animation: ac-pulse 5s ease-in-out infinite;
 }
 
-.opt {
-  display: block;
-  width: 100%;
-  text-align: left;
-  margin-top: 12px;
-  padding: 16px 20px;
-  border-radius: var(--radius-opt);
-  border: 1px solid var(--sand);
-  background: rgba(255, 255, 255, 0.5);
-  color: var(--char);
-  font-family: var(--sans);
-  font-weight: 300;
-  font-size: 15.5px;
-  cursor: pointer;
-  transition: border-color 0.3s, background 0.3s;
+@media (prefers-reduced-motion: reduce) {
+  .settleMark {
+    animation: none;
+  }
 }
 
-.opt:hover {
-  border-color: var(--terra);
-  background: rgba(184, 122, 84, 0.07);
+/* ---- Intro ------------------------------------------------------------------ */
+
+.introWordmark {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--walnut);
+  opacity: 0.6;
+  margin-bottom: 34px;
+  line-height: 1;
 }
 
-.opt:focus-visible {
-  outline: 2px solid var(--terra);
-  outline-offset: 2px;
+.lede {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--sage);
+  margin-top: 18px;
+  line-height: 1.45;
+  max-width: 380px;
 }
 
+/* ---- Buttons ---------------------------------------------------------------- */
+
+/* The single accent CTA — the only loud, filled control. */
 .btn {
-  margin-top: 40px;
-  background: var(--terra);
+  margin-top: 44px;
+  background: var(--accent);
   color: var(--ivory);
   border: none;
   border-radius: 999px;
-  padding: 16px 40px;
+  padding: 16px 44px;
   font-family: var(--sans);
   font-size: 15px;
   letter-spacing: 0.3px;
   cursor: pointer;
-  box-shadow: 0 10px 30px -16px rgba(107, 74, 52, 0.55);
-  transition: background 0.35s, transform 0.35s;
+  box-shadow: 0 12px 30px -16px rgba(140, 98, 54, 0.6);
+  transition: background 0.4s ease, transform 0.4s ease;
 }
 
 .btn:hover {
-  background: #a96d49;
+  background: var(--accent-deep);
   transform: translateY(-1px);
 }
 
@@ -108,13 +126,15 @@
   outline-offset: 3px;
 }
 
+/* Quiet text "back" affordance. */
 .back {
-  margin-top: 30px;
+  margin-top: 34px;
   background: none;
   border: none;
   color: var(--walnut);
   opacity: 0.5;
-  font-size: 13px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
   font-family: var(--sans);
   cursor: pointer;
   padding: 0;
@@ -125,165 +145,392 @@
   opacity: 0.85;
 }
 
-/* The result card. */
+/* ---- Progress --------------------------------------------------------------- */
+
+.seg {
+  display: flex;
+  gap: 7px;
+  margin-bottom: 58px;
+}
+
+.seg span {
+  flex: 1;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--sand);
+  transform-origin: left;
+  transition: background 0.5s ease;
+}
+
+.seg span.on {
+  background: var(--accent);
+}
+
+/* The active segment breathes. */
+.seg span.active {
+  background: var(--accent);
+  animation: ac-breathe 3.6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .seg span.active {
+    animation: none;
+  }
+}
+
+/* ---- Question --------------------------------------------------------------- */
+
+.stepLabel {
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--walnut);
+  opacity: 0.7;
+  margin-bottom: 22px;
+}
+
+.question {
+  font-size: clamp(28px, 8vw, 40px);
+  margin-bottom: 40px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 17px 22px;
+  border-radius: var(--radius-opt);
+  border: 1px solid var(--sand);
+  background: rgba(255, 255, 255, 0.45);
+  color: var(--char);
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.35;
+  cursor: pointer;
+  transition: border-color 0.35s ease, background 0.35s ease;
+}
+
+.opt:hover {
+  border-color: var(--accent);
+  background: rgba(140, 98, 54, 0.06);
+}
+
+.opt:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---- Result card ------------------------------------------------------------ */
+
 .card {
-  background: linear-gradient(168deg, #fcfaf4, #f7f1e6);
+  position: relative;
+  background: var(--card);
   border: 1px solid var(--sand);
   border-radius: var(--radius-card);
-  padding: 46px 40px 34px;
-  box-shadow: 0 36px 70px -38px rgba(107, 74, 52, 0.4);
+  padding: 54px 46px 44px;
+  box-shadow: 0 36px 70px -36px rgba(107, 74, 52, 0.4);
 }
 
-.cardHead {
-  text-align: center;
-  margin-bottom: 24px;
+.readKicker {
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--walnut);
+  opacity: 0.55;
+  margin-bottom: 18px;
 }
 
-.focus {
-  font-weight: 400;
+/* The read-out sentence — weather, not a label. */
+.readout {
+  font-family: var(--serif);
+  font-weight: 300;
+  font-size: clamp(25px, 5.6vw, 31px);
+  line-height: 1.3;
+  letter-spacing: 0.2px;
+  color: var(--char);
+  max-width: 440px;
+  text-wrap: pretty;
 }
 
-/* The loud anchor — the one thing for the morning. Set apart, warmer. */
+/* The one loud anchor, in its own warm panel. */
 .anchor {
-  text-align: center;
-  padding: 26px 8px 30px;
-  margin-bottom: 6px;
-  border-top: 1px solid rgba(221, 209, 188, 0.8);
+  margin-top: 40px;
+  padding: 30px 28px;
+  background: var(--ivory);
+  border: 1px solid var(--sand-warm);
+  border-radius: var(--radius-panel);
 }
 
 .anchorKicker {
   font-size: 10.5px;
-  letter-spacing: 0.24em;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
-  color: var(--terra);
-  margin-bottom: 12px;
+  color: var(--accent);
+  margin-bottom: 14px;
 }
 
 .anchorText {
-  font-size: 25px;
-  line-height: 1.3;
-  color: #3a322c;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(26px, 6vw, 33px);
+  line-height: 1.18;
+  letter-spacing: 0.2px;
+  color: var(--char);
+  text-wrap: balance;
+}
+
+/* The supporting quartet. */
+.sections {
+  margin-top: 34px;
 }
 
 .row {
   display: flex;
   gap: 18px;
+  align-items: baseline;
   padding: 18px 0;
-  border-top: 1px solid rgba(221, 209, 188, 0.8);
+  border-top: 1px solid rgba(221, 209, 188, 0.7);
 }
 
 .lab {
-  width: 54px;
+  width: 52px;
   flex: none;
-  font-size: 11px;
+  font-size: 10.5px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--sage);
-  padding-top: 4px;
 }
 
 .body {
-  font-family: var(--serif);
-  font-size: 20px;
-  line-height: 1.4;
-  color: #3a322c;
+  flex: 1;
 }
 
-/* The "why?" affordance — restrained: a quiet underlined link, never clutter. */
-.why {
+.bodyText {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 1.45;
+  color: var(--char);
+  text-wrap: pretty;
+}
+
+/* The "More" expander — a quiet underlined accent link. */
+.more {
   display: inline-block;
-  margin-left: 10px;
   background: none;
   border: none;
-  padding: 0;
+  padding: 6px 0 0;
+  margin: 0;
   font-family: var(--sans);
   font-size: 12px;
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  color: var(--sage);
-  text-decoration: underline;
-  text-decoration-color: rgba(152, 162, 125, 0.5);
-  text-underline-offset: 3px;
+  letter-spacing: 0.04em;
+  color: var(--accent);
   cursor: pointer;
-  vertical-align: baseline;
-  transition: color 0.3s;
+  line-height: 1.4;
+  border-bottom: 1px solid rgba(140, 98, 54, 0.4);
+  border-radius: 0;
+  transition: border-color 0.3s;
 }
 
-.why:hover {
-  color: var(--terra);
+.more:hover {
+  border-bottom-color: var(--accent);
 }
 
-.why:focus-visible {
-  outline: 2px solid var(--terra);
+.more:focus-visible {
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
-  border-radius: 3px;
 }
 
-/* The revealed depth — paraphrase + attribution. Sans, smaller, calm. */
+/* The revealed depth — paraphrase + citation. */
 .detail {
   margin-top: 12px;
-  padding: 14px 16px;
-  background: rgba(152, 162, 125, 0.08);
-  border-left: 2px solid rgba(152, 162, 125, 0.5);
-  border-radius: 8px;
 }
 
 .detailBody {
   font-family: var(--sans);
   font-weight: 300;
-  font-size: 14px;
-  line-height: 1.6;
-  color: #4a423b;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--char-soft);
+  margin-bottom: 8px;
+  text-wrap: pretty;
 }
 
 .detailSrc {
-  margin-top: 8px;
-  font-family: var(--sans);
-  font-weight: 300;
-  font-size: 11.5px;
+  font-family: var(--serif);
   font-style: italic;
-  color: #a89c8d;
-}
-
-/* The wisdom epigraph — a graceful serif line, room to breathe, the
-   attribution small beneath. Treated as wisdom, not fine print. */
-.epigraph {
-  text-align: center;
-  margin: 38px auto 6px;
-  padding-top: 28px;
-  border-top: 1px solid rgba(221, 209, 188, 0.8);
-  max-width: 40ch;
-}
-
-.epigraphText {
-  font-size: 19px;
-  font-style: italic;
-  line-height: 1.5;
-  color: var(--walnut);
-  letter-spacing: 0.2px;
-}
-
-.epigraphCite {
-  margin-top: 14px;
-  font-family: var(--sans);
-  font-weight: 300;
-  font-size: 11px;
-  letter-spacing: 0.06em;
+  font-size: 14px;
   color: var(--sage);
 }
 
-/* The legal note — separate, smaller, muted. Lives outside the card, with a
-   clear gap from the epigraph, so it reads plainly as the footnote it is. */
+/* ---- Epigraph + disclaimer -------------------------------------------------- */
+
+.epigraph {
+  margin-top: 42px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(221, 209, 188, 0.7);
+  text-align: center;
+}
+
+.epigraphText {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(21px, 4.8vw, 25px);
+  line-height: 1.4;
+  color: var(--walnut);
+  margin: 0 auto;
+  max-width: 400px;
+  text-wrap: balance;
+}
+
+.epigraphCite {
+  margin-top: 16px;
+  font-family: var(--serif);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--sage);
+}
+
+/* The legal note — clearly apart, small and muted. */
 .disclaimer {
   text-align: center;
-  margin-top: 22px;
+  font-family: var(--sans);
   font-size: 10.5px;
+  color: var(--walnut);
+  opacity: 0.42;
   letter-spacing: 0.04em;
-  color: #b3a899;
+  margin-top: 38px;
   line-height: 1.5;
 }
 
-.again {
+/* ---- Wisdom opt-in card (the dosha explainer, behind a tap) ----------------- */
+
+.wisdom {
+  margin-top: 22px;
+  background: rgba(252, 250, 244, 0.6);
+  border: 1px solid var(--sand-warm);
+  border-radius: var(--radius-panel);
+  padding: 22px 26px;
+}
+
+.wisdomToggle {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.wisdomToggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.wisdomTitle {
+  font-family: var(--serif);
+  font-size: 21px;
+  color: var(--char);
+}
+
+.wisdomCaret {
+  font-family: var(--sans);
+  font-size: 20px;
+  color: var(--accent);
+  flex: none;
+  line-height: 1;
+}
+
+.wisdomBody {
+  margin-top: 18px;
+}
+
+.wisdomBody p {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--char-soft);
+  text-wrap: pretty;
+}
+
+.wisdomBody p + p {
+  margin-top: 12px;
+}
+
+.wisdomBody em {
+  font-style: italic;
+  color: var(--walnut);
+}
+
+/* ---- Practitioner teaser (kept; honestly "coming soon") --------------------- */
+
+.teaser {
+  margin-top: 30px;
   text-align: center;
-  margin-top: 26px;
+}
+
+.teaserLinks {
+  display: inline-flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.teaserLink {
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--walnut);
+  opacity: 0.42;
+  cursor: default;
+}
+
+.teaserDot {
+  width: 1px;
+  height: 14px;
+  background: var(--sand);
+}
+
+.teaserSoon {
+  margin-top: 14px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--walnut);
+  opacity: 0.45;
+}
+
+/* ---- Done / Again ----------------------------------------------------------- */
+
+.again {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* ---- Mobile ----------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  .page {
+    padding: 40px 18px;
+  }
+  .card {
+    padding: 40px 26px 34px;
+  }
+  .anchor {
+    padding: 26px 22px;
+  }
 }
