@@ -61,11 +61,23 @@
   align-items: center;
 }
 
+/* The real logo, large and centered on the settling open — breathing slowly. */
 .settleMark {
-  width: 96px;
-  height: 96px;
-  margin-bottom: 32px;
+  width: 120px;
+  height: auto;
+  margin-bottom: 26px;
   animation: ac-pulse 5s ease-in-out infinite;
+}
+
+/* The same logo, small and faint, in the result card's top-right corner. */
+.cardMark {
+  position: absolute;
+  top: 20px;
+  right: 22px;
+  width: 40px;
+  height: auto;
+  opacity: 0.26;
+  pointer-events: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import {
   QUESTIONS,
   evaluate,
@@ -10,6 +11,13 @@ import {
 } from "@/lib/engine";
 import { saveCheckIn } from "@/lib/saveCheckIn";
 import styles from "./checkin.module.css";
+
+/**
+ * The real logo: the tree-of-life meditator (seated in lotus, a tree up the
+ * spine with seven chakra dots, in a thin circle, warm sepia). Extracted from
+ * the approved design comp; transparent-background 922×922 PNG in /public.
+ */
+const LOGO_SRC = "/logo.png";
 
 /**
  * The wisdom epigraph set quietly beneath each result — a line of classical
@@ -85,39 +93,18 @@ export default function CheckInPage() {
   );
 }
 
-/** The tree-of-life mark, drawn inline (ported from the design comp's SVG).
- *  No raster asset needed — calm line art that scales and tints from CSS. */
-function TreeMark({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      stroke="#6B4A34"
-      strokeWidth={1.4}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden
-    >
-      <circle cx="50" cy="50" r="46" strokeWidth={1.1} />
-      <path d="M26 67 Q50 55 74 67 Q50 80 26 67 Z" strokeWidth={1.2} />
-      <path d="M50 41 Q29 49 27 65" />
-      <path d="M50 41 Q71 49 73 65" />
-      <path d="M50 36 L50 63" strokeWidth={1} />
-      <circle cx="50" cy="27" r="5.4" fill="#6B4A34" stroke="none" />
-      {[39, 43.5, 48, 52.5, 57, 61.5].map((cy) => (
-        <circle key={cy} cx="50" cy={cy} r="1.4" fill="#8C6236" stroke="none" />
-      ))}
-    </svg>
-  );
-}
-
-/** Screen 1 — the settling open. A soft beat, the mark breathing, then Begin. */
+/** Screen 1 — the settling open. A soft beat, the logo breathing, then Begin. */
 function Intro({ onBegin }: { onBegin: () => void }) {
   return (
     <div className={`${styles.center} fade`}>
-      <TreeMark className={styles.settleMark} />
+      <Image
+        src={LOGO_SRC}
+        alt="Ayurser — the tree of life"
+        width={120}
+        height={120}
+        priority
+        className={styles.settleMark}
+      />
       <p className={styles.introWordmark}>Ayurser</p>
       <h1 className="serif">How are you today?</h1>
       <p className={styles.lede}>A one-minute check-in. Take a slow breath in.</p>
@@ -180,6 +167,16 @@ function ResultView({ result, onAgain }: { result: Result; onAgain: () => void }
   return (
     <div className="fade">
       <div className={styles.card}>
+        {/* The logo, small and faint, in the top-right corner of the card. */}
+        <Image
+          src={LOGO_SRC}
+          alt=""
+          width={40}
+          height={40}
+          aria-hidden
+          className={styles.cardMark}
+        />
+
         {/* The read-out — weather, not a label. */}
         <p className={styles.readKicker}>Today&rsquo;s reading</p>
         <p className={styles.readout}>{guidance.readout}</p>
@@ -247,7 +244,7 @@ function ResultView({ result, onAgain }: { result: Result; onAgain: () => void }
       {/* Practitioner teaser — kept, honestly "coming soon". */}
       <div className={styles.teaser}>
         <div className={styles.teaserLinks}>
-          <span className={styles.teaserLink}>Learn</span>
+          <span className={styles.teaserLink}>Wisdom</span>
           <span className={styles.teaserDot} aria-hidden />
           <span className={styles.teaserLink}>Find a practitioner</span>
         </div>
