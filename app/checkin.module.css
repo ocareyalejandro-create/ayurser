@@ -245,14 +245,45 @@
   color: #a89c8d;
 }
 
-.foot {
+/* The wisdom epigraph — a graceful serif line, room to breathe, the
+   attribution small beneath. Treated as wisdom, not fine print. */
+.epigraph {
   text-align: center;
+  margin: 38px auto 6px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(221, 209, 188, 0.8);
+  max-width: 40ch;
+}
+
+.epigraphText {
+  font-size: 19px;
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--walnut);
+  letter-spacing: 0.2px;
+}
+
+.epigraphCite {
+  margin-top: 14px;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--sage);
+}
+
+/* The legal note — separate, smaller, muted. Lives outside the card, with a
+   clear gap from the epigraph, so it reads plainly as the footnote it is. */
+.disclaimer {
+  text-align: center;
+  margin-top: 22px;
   font-size: 10.5px;
-  color: #a89c8d;
-  line-height: 1.6;
-  margin-top: 26px;
+  letter-spacing: 0.04em;
+  color: #b3a899;
+  line-height: 1.5;
 }
 
 .again {
   text-align: center;
+  margin-top: 26px;
 }

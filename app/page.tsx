@@ -11,6 +11,20 @@ import {
 import { saveCheckIn } from "@/lib/saveCheckIn";
 import styles from "./checkin.module.css";
 
+/**
+ * The wisdom epigraph set quietly beneath each result — a line of classical
+ * wisdom, cited. Kept as a swappable shape so it can later rotate from the
+ * curated `knowledge/wisdom.md` collection. Only public-domain classical lines
+ * go here verbatim, with a verified attribution (see wisdom.md's rules).
+ */
+const EPIGRAPH = {
+  text: "Like increases like; opposites restore balance.",
+  attribution: "Aṣṭāṅga Hṛdaya, Sūtrasthāna 1.13½",
+} as const;
+
+/** The legal note — separate from the wisdom, never sharing its weight. */
+const DISCLAIMER = "Lifestyle guidance inspired by Ayurveda — not medical advice.";
+
 /** The screens of the one minute. A small, explicit state machine. */
 type Screen =
   | { kind: "intro" }
@@ -150,12 +164,16 @@ function ResultView({ result, onAgain }: { result: Result; onAgain: () => void }
         {/* SEAM: the opt-in "why did we ask?" learn card lands here in a later
             phase. Experience first, explanation second — not built now. */}
 
-        <p className={styles.foot}>
-          Like increases like; opposites restore balance.
-          <br />— Ashtanga Hridaya, Sutrasthana 1.13 · Lifestyle guidance inspired by Ayurveda,
-          not medical advice.
-        </p>
+        {/* Wisdom, set as wisdom: a quiet serif epigraph with its attribution
+            small beneath. Treated with grace, not as fine print. */}
+        <figure className={styles.epigraph}>
+          <blockquote className={`serif ${styles.epigraphText}`}>{EPIGRAPH.text}</blockquote>
+          <figcaption className={styles.epigraphCite}>— {EPIGRAPH.attribution}</figcaption>
+        </figure>
       </div>
+
+      {/* The legal note: separate, smaller, muted — clearly the footnote. */}
+      <p className={styles.disclaimer}>{DISCLAIMER}</p>
 
       <div className={styles.again}>
         <button className={styles.btn} onClick={onAgain}>
