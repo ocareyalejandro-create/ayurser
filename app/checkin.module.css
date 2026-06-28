@@ -88,6 +88,42 @@
 
 /* ---- Intro ------------------------------------------------------------------ */
 
+/* Full-height column: the content group centered, the teaser pinned bottom.
+   100vh minus the .page vertical padding (56px top + 56px bottom = 112px). */
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: calc(100vh - 112px);
+}
+
+/* The grouped upper content (logo / wordmark / heading / subline / Begin),
+   centered in the space above the teaser. */
+.introGroup {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The intro heading — matched to the comp's home <h1> exactly:
+   Cormorant Garamond 300, 54px, letter-spacing .5px, line-height 1.04.
+   Clamped only at the small end so phones never clip. */
+.introHeading {
+  font-size: clamp(36px, 9vw, 54px);
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.04;
+}
+
+/* The teaser, pinned to the bottom of the intro with comfortable padding. */
+.introTeaser {
+  margin-top: 0;
+  padding-top: 28px;
+}
+
 .introWordmark {
   font-family: var(--serif);
   font-weight: 500;

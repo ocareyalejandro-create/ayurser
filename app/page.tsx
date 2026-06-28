@@ -93,34 +93,38 @@ export default function CheckInPage() {
   );
 }
 
-/** Screen 1 — the settling open. A soft beat, the logo breathing, then Begin. */
+/** Screen 1 — the settling open. A soft beat, the logo breathing, then Begin.
+ *  Full-height column: the content group sits centered, the teaser pinned to
+ *  the bottom (matching the comp's home). */
 function Intro({ onBegin }: { onBegin: () => void }) {
   return (
-    <div className={`${styles.center} fade`}>
-      <Image
-        src={LOGO_SRC}
-        alt="Ayurser — the tree of life"
-        width={120}
-        height={120}
-        priority
-        className={styles.settleMark}
-      />
-      <p className={styles.introWordmark}>Ayurser</p>
-      <h1 className="serif">How do you feel today?</h1>
-      <p className={styles.lede}>A one-minute check-in. Take a slow breath in.</p>
-      <button className={styles.btn} onClick={onBegin}>
-        Begin today&rsquo;s check-in
-      </button>
-      <Teaser />
+    <div className={`${styles.intro} fade`}>
+      <div className={styles.introGroup}>
+        <Image
+          src={LOGO_SRC}
+          alt="Ayurser — the tree of life"
+          width={120}
+          height={120}
+          priority
+          className={styles.settleMark}
+        />
+        <p className={styles.introWordmark}>Ayurser</p>
+        <h1 className={`serif ${styles.introHeading}`}>How do you feel today?</h1>
+        <p className={styles.lede}>A one-minute check-in. Take a slow breath in.</p>
+        <button className={styles.btn} onClick={onBegin}>
+          Begin today&rsquo;s check-in
+        </button>
+      </div>
+      <Teaser className={styles.introTeaser} />
     </div>
   );
 }
 
 /** The quiet footer teaser — kept, honestly "coming soon". Shared by the intro
- *  (below Begin) and the result screen. */
-function Teaser() {
+ *  (pinned to the bottom) and the result screen. */
+function Teaser({ className }: { className?: string }) {
   return (
-    <div className={styles.teaser}>
+    <div className={className ? `${styles.teaser} ${className}` : styles.teaser}>
       <div className={styles.teaserLinks}>
         <span className={styles.teaserLink}>Wisdom</span>
         <span className={styles.teaserDot} aria-hidden />
