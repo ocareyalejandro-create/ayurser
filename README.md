@@ -25,32 +25,33 @@ npm run typecheck    # tsc --noEmit
 npm test             # engine unit tests (vitest)
 ```
 
-The check-in works fully **without** any database. Persistence is wired but dormant until you add Supabase (below).
+The check-in works fully **without** any database. Persistence is wired but dormant until you add a Postgres connection string (below).
 
 ---
 
-## Activate Supabase (optional — capture early, interpret later)
+## Activate persistence (optional — capture early, interpret later)
 
-The journal records every check-in so it can one day notice patterns. Until env vars are present, saving silently no-ops and never blocks the minute. To turn it on:
+The journal records every check-in so it can one day notice patterns. The browser POSTs each completed check-in to a server Route Handler (`app/api/check-in/route.ts`), which inserts it into **Neon / Vercel Postgres** using a **secret, server-only** connection string — the browser never touches the database. Until the env var is present, saving silently no-ops and never blocks the minute. To turn it on:
 
-1. **Create a Supabase project** at [supabase.com](https://supabase.com).
-2. **Add the two public env vars.** Copy `.env.local.example` to `.env.local` and fill in your project URL and **anon (public)** key:
+1. **Provision a database** — Neon, or the Neon integration in the Vercel dashboard (always-warm, Postgres).
+2. **Add the connection string.** Copy `.env.local.example` to `.env.local` and set `DATABASE_URL` (the app also accepts `POSTGRES_URL`, which Vercel's Neon integration may inject):
    ```bash
    cp .env.local.example .env.local
-   # then edit NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY
+   # then edit DATABASE_URL=postgres://...   (SECRET — never NEXT_PUBLIC_)
    ```
-3. **Run the migration.** In the Supabase SQL Editor, paste and run [`supabase/migrations/0001_check_ins.sql`](supabase/migrations/0001_check_ins.sql). It creates the `check_ins` table, enables Row Level Security, and adds an anon-insert policy appropriate for an anonymous-device journal (the rationale is documented in the SQL).
-4. **Restart `npm run dev`.** Completed check-ins now write to `check_ins`, keyed by an anonymous per-device id stored in `localStorage`.
+3. **Run the migration.** Apply [`migrations/0001_check_ins.sql`](migrations/0001_check_ins.sql) against the database (e.g. `psql "$DATABASE_URL" -f migrations/0001_check_ins.sql`). It creates the `check_ins` table and the `(device_id, created_at desc)` index. No RLS — access is server-side via the connection string.
+4. **Restart `npm run dev`.** Completed check-ins now POST to `/api/check-in` and write to `check_ins`, keyed by an anonymous per-device id stored in `localStorage`.
 
 ---
 
 ## Structure
 
 ```
-app/            Next.js App Router — globals.css (design tokens), layout, the check-in page
+app/            Next.js App Router — globals.css (design tokens), layout, the check-in page,
+                api/check-in/route.ts (server-side save endpoint)
 lib/            engine.ts (the qualities engine, pure + unit-tested) and the edges:
-                supabase.ts, device.ts, saveCheckIn.ts
-supabase/       migrations/0001_check_ins.sql
+                db.ts (server Postgres), device.ts, saveCheckIn.ts
+migrations/     0001_check_ins.sql (plain Postgres)
 legacy/         the preserved static prototype (index.html)
 prototype/      engine.html — the hand-built reference (palette, voice, content)
 knowledge/      cited Ayurveda notes the engine draws from
