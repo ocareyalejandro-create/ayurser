@@ -33,10 +33,10 @@ individual is always sent to a real human, who reads what no book can.
 - [x] [The Six Tastes (rasa) — how each moves the three forces](./rasa.md)
 
 ### Part III · Living in Rhythm
-- [ ] The Day (dinacharya) — the morning that steadies everything
-- [ ] The Seasons (ritucharya) — meeting the year as it turns
-- [ ] Sleep — the nurse of the body
-- [ ] Oil (abhyanga) — the daily kindness
+- [x] [The Day (dinacharya) — the morning that steadies everything](./dinacharya.md)
+- [x] [The Seasons (ritucharya) — meeting the year as it turns](./ritucharya.md)
+- [x] [Sleep — the nurse of the body](./sleep.md)
+- [x] [Oil (abhyanga) — the daily kindness](./abhyanga.md)
 
 ### Part IV · What We Are Made Of
 - [ ] The Tissues (dhātu) — how the body builds itself
