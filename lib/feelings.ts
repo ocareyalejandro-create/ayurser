@@ -6,11 +6,19 @@
  * small set of common felt experiences and answers each in our own voice — the
  * convergent wisdom of the lineage, plainly.
  *
+ * OUR VOICE — quiet and reverent. Spare, calm, almost meditative. Rules, so the
+ * lexicon only ever grows in ONE author's voice (never a template):
+ *  - Meet the felt experience in human terms FIRST. Translate, don't teach — do
+ *    not open by naming the quality/mechanism.
+ *  - Offer one or two grounded moves, spoken softly — never a checklist.
+ *  - No template tails ("the classic answer", "tends to settle it"). Each line
+ *    finds its own quiet close. Vary the cadence.
+ *  - Weather, not label. Lifestyle only — never diagnosis or medical advice.
+ *
  * Honesty, by design:
- *  - "We noticed you mentioned X", never "you ARE X". Weather, not label.
- *  - Lifestyle only — never diagnosis, never medical advice. Where a feeling is
- *    ambiguous we say so and point to a real practitioner (the app=relationship,
- *    practitioner=intervention keystone — see PHILOSOPHY.md).
+ *  - "We noticed you mentioned X" (the result's heading), never "you ARE X".
+ *  - Where a feeling is ambiguous we say so and point to a real practitioner
+ *    (the app=relationship, practitioner=intervention keystone — see PHILOSOPHY.md).
  *  - Provenance lives UNDERNEATH (the `source` field) — never shown inline; it
  *    pools into the References section later. We are our own author, crediting
  *    our influences lightly, and we never reproduce a source verbatim.
@@ -27,7 +35,7 @@ export interface FeelingMatch {
   readonly feeling: string;
   /** The qualities (gunas) this experience tends to signal — the engine's vocabulary. */
   readonly qualities: readonly Quality[];
-  /** Our own-author response: convergent, weather-not-label, lifestyle only. */
+  /** Our own-author response, in the quiet-and-reverent voice (see file header). */
   readonly response: string;
   /** Provenance, underneath — never shown inline; pooled into References later. */
   readonly source: string;
@@ -44,7 +52,7 @@ export const MAX_FEELINGS = 2;
 /**
  * The lexicon. A small, high-confidence starter set of the most common felt
  * experiences. It grows over time (more feelings, richer responses); the engine
- * that consumes it does not change.
+ * that consumes it does not change. Every response is in our one voice.
  */
 const FEELINGS: readonly FeelingEntry[] = [
   {
@@ -52,9 +60,9 @@ const FEELINGS: readonly FeelingEntry[] = [
     patterns: [/\bbloat/i, /\bgassy\b/i, /\bflatulen/i, /\bdistend/i],
     qualities: ["dry", "mobile"],
     response:
-      "Bloating and gas often follow the dry, restless quality unsettling " +
-      "digestion. Warm, cooked, well-spiced food — and slowing down at meals — " +
-      "tend to settle it.",
+      "Bloating and gas come when digestion loses its rhythm. Meet it with " +
+      "warmth and simplicity — cooked food, gently spiced, eaten slowly and " +
+      "unhurried. A calm meal is half the medicine.",
     source: "after Lad, *The Science of Self-Healing*, pp. 82–83 · Aṣṭāṅga Hṛdaya, Sū. 1.14",
   },
   {
@@ -62,9 +70,9 @@ const FEELINGS: readonly FeelingEntry[] = [
     patterns: [/\bdry\b/i, /\bdryness\b/i, /\bflaky\b/i, /\bchapped\b/i, /\bcracked\b/i],
     qualities: ["dry", "cold"],
     response:
-      "Dryness — in the skin or lips — is the body asking for warmth and oil. " +
-      "Warm cooked food, steady hydration, and a little oil on the skin are the " +
-      "classic answer.",
+      "Dryness is the body asking for what it lacks: warmth, and oil. Let the " +
+      "food be cooked and warm, the water unhurried, and take a moment to oil " +
+      "the skin before you wash. Old, simple, kind.",
     source: "after Lad, *The Science of Self-Healing*, p. 128 · Aṣṭāṅga Hṛdaya, Sū. 2.8–9",
   },
   {
@@ -81,8 +89,9 @@ const FEELINGS: readonly FeelingEntry[] = [
     ],
     qualities: ["mobile", "light"],
     response:
-      "A wired, scattered, restless feeling is the wind quality rising. Warmth, " +
-      "slowing down, a steady routine and unhurried breath tend to bring it back down.",
+      "A restless, scattered mind is the wind rising in you. Meet it with weight " +
+      "and warmth — a slower pace, a steady routine, breath drawn long and " +
+      "unhurried. The body remembers how to settle when you stop asking it to rush.",
     source: "after Lad, *The Science of Self-Healing* (Vāta) · Aṣṭāṅga Hṛdaya, Sū. 1",
   },
   {
@@ -98,8 +107,9 @@ const FEELINGS: readonly FeelingEntry[] = [
     ],
     qualities: ["heavy", "dull"],
     response:
-      "Heaviness and fog are the earth quality settling in. Gentle movement, " +
-      "lightness and warmth — rather than more rest — tend to lift it.",
+      "Heaviness and fog settle when the body slows too far. Not more rest, but " +
+      "gentle motion answers it — a little warmth, a little stir, light food and " +
+      "light movement, enough to lift the weight by a degree.",
     source: "after Lad, *The Science of Self-Healing*, p. 104 · Aṣṭāṅga Hṛdaya, Sū. 1.6½–7½",
   },
   {
@@ -117,8 +127,9 @@ const FEELINGS: readonly FeelingEntry[] = [
     ],
     qualities: ["hot", "sharp"],
     response:
-      "Heat — irritability, burning, flushing — is the fire quality running high. " +
-      "Cooling food, calm, shade and not rushing tend to ease it.",
+      "Heat — in the skin, in the temper — is fire asking for shade. Cool, sweet, " +
+      "simple food; calm over effort; nothing rushed in the warm hours. Let the " +
+      "edge soften before you meet the day.",
     source: "after Lad, *The Science of Self-Healing* (Pitta) · Aṣṭāṅga Hṛdaya, Sū. 1",
   },
   {
@@ -134,8 +145,9 @@ const FEELINGS: readonly FeelingEntry[] = [
     ],
     qualities: ["mobile", "light"],
     response:
-      "Broken, restless sleep often follows the light, mobile quality. A warm, " +
-      "settling evening — and less screen before bed — tends to help you land.",
+      "Broken sleep follows a mind still in motion at nightfall. Let the evening " +
+      "grow warm and quiet — a settled meal, dimmed light, less screen — and give " +
+      "the body the slowness it needs to fall.",
     source: "after Lad, *The Science of Self-Healing*, p. 102 · Aṣṭāṅga Hṛdaya, Sū. 2",
   },
   {
@@ -151,9 +163,9 @@ const FEELINGS: readonly FeelingEntry[] = [
     ],
     qualities: [],
     response:
-      "Low energy can come from more than one direction — too much going on, or " +
-      "too little movement. Gentle nourishment, warmth and real rest are steady " +
-      "starting points; if it lingers, it is worth a practitioner's eye.",
+      "Low energy keeps many doors. Begin gently — warmth, real nourishment, " +
+      "true rest — and notice what returns. If the tiredness lingers, let a " +
+      "practitioner look closer; some things ask for a human eye.",
     source: "after Lad, *The Science of Self-Healing*",
   },
 ];
