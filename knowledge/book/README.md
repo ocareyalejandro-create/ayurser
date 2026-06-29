@@ -22,11 +22,11 @@ then the forces made from it, then the fire, the rhythm, the body, and the mind.
 The vocabulary always comes before the words that use it.
 
 **Introduction**
-- [ ] What Ayurveda Is — balance, and living in tune with your nature
+- [x] [What Ayurveda Is](./introduction.md) — balance, and living in tune with your nature
 
 **Part One · The Language of Nature**
-- [ ] The Five Elements — the building blocks of everything
-- [ ] The Qualities (guṇa) — the simple felt language: hot/cold, heavy/light…
+- [x] [The Five Elements](./elements.md) — the building blocks of everything
+- [x] [The Qualities (guṇa)](./qualities.md) — the simple felt language: hot/cold, heavy/light…
 - [x] [The Six Tastes (rasa)](./rasa.md)
 
 **Part Two · The Three Forces**
@@ -49,13 +49,13 @@ The vocabulary always comes before the words that use it.
 - [x] [Ojas — the sap of vitality](./ojas.md)
 
 **Part Six · The Mind**
-- [ ] The Three States of Mind (sattva, rajas, tamas)
-- [ ] The Senses — the doors we guard
+- [x] [The Three States of Mind (sattva, rajas, tamas)](./mind.md)
+- [x] [The Senses — the doors we guard](./senses.md)
 
 **An Author's Note** *(at the close)*
-- [ ] How this book was written — its sources, and its proper humility: that
-  Ayurveda is a living art, that even practitioners differ, and that the last
-  word belongs to a real human, never a book.
+- [x] [An Author's Note](./afterword.md) — how this book was written, its proper
+  humility (that Ayurveda is a living art, that even practitioners differ), and
+  why the last word belongs to a real human, never a book.
 
 ---
 
