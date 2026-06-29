@@ -1,6 +1,6 @@
 # Vāta — the Wind
 
-*The first chapter of the book we are writing. Authored in our own voice and
+*Authored in our own voice and
 structure, grounded in the classical texts (quoted only from public-domain
 translations), and informed by the modern teachers we credit in the References.
 We learned from them; we did not copy them.*

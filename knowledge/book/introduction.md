@@ -1,7 +1,7 @@
 # What Ayurveda Is
 
 *The doorway in. Authored in our own voice; the sources and the method are set
-out in the Author's Note at the close.*
+out in the Author's Note that opens the book.*
 
 ---
 

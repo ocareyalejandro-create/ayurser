@@ -21,6 +21,9 @@ The reader meets the *world* first — the elements, the qualities, the tastes �
 then the forces made from it, then the fire, the rhythm, the body, and the mind.
 The vocabulary always comes before the words that use it.
 
+**Author's Note** *(front matter)*
+- [x] [An Author's Note](./authors-note.md) — how this book was made, and the hands it defers to
+
 **Introduction**
 - [x] [What Ayurveda Is](./introduction.md) — balance, and living in tune with your nature
 
@@ -51,11 +54,6 @@ The vocabulary always comes before the words that use it.
 **Part Six · The Mind**
 - [x] [The Three States of Mind (sattva, rajas, tamas)](./mind.md)
 - [x] [The Senses — the doors we guard](./senses.md)
-
-**An Author's Note** *(at the close)*
-- [x] [An Author's Note](./afterword.md) — how this book was written, its proper
-  humility (that Ayurveda is a living art, that even practitioners differ), and
-  why the last word belongs to a real human, never a book.
 
 ---
 

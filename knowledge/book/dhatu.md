@@ -1,6 +1,6 @@
 # What We Are Made Of — The Tissues (Dhātu)
 
-*Part IV, chapter one. Authored in our own voice, grounded in the classical
+*Authored in our own voice, grounded in the classical
 texts (public domain), informed by the teachers we credit in the References. We
 learned from them; we did not copy them.*
 
