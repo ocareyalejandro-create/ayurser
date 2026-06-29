@@ -8,47 +8,59 @@ It is authored in **one voice** — quiet and reverent — and written **by us**
 quote the public-domain classics (*Caraka Saṃhitā*, *Suśruta Saṃhitā*, *Aṣṭāṅga
 Hṛdaya*) and write our own synthesis of everything we have learned, crediting the
 modern teachers in each chapter's References. **We learn from them; we never copy
-them.** No claim is made beyond what the sources hold; where we are uncertain, we
-say so, or send the reader to a practitioner.
-
-Ayurveda is a living art, not a fixed doctrine — even practitioners, its truest
-source, disagree among themselves. So this book holds the *convergent* ground,
-names where the art varies, and never pretends to be the last word: the
-individual is always sent to a real human, who reads what no book can.
+them.**
 
 > *Like increases like; opposites lead to decrease.*
 > — *Aṣṭāṅga Hṛdaya*, Sūtrasthāna 1.13½ — the law beneath every page.
 
 ---
 
-## Contents
+## Book One · The Foundations
 
-### Part I · The Three Forces
+The reader meets the *world* first — the elements, the qualities, the tastes —
+then the forces made from it, then the fire, the rhythm, the body, and the mind.
+The vocabulary always comes before the words that use it.
+
+**Introduction**
+- [ ] What Ayurveda Is — balance, and living in tune with your nature
+
+**Part One · The Language of Nature**
+- [ ] The Five Elements — the building blocks of everything
+- [ ] The Qualities (guṇa) — the simple felt language: hot/cold, heavy/light…
+- [x] [The Six Tastes (rasa)](./rasa.md)
+
+**Part Two · The Three Forces**
 - [x] [Vāta — the Wind](./vata.md)
 - [x] [Pitta — the Fire](./pitta.md)
 - [x] [Kapha — the Earth](./kapha.md)
 
-### Part II · The Fire of Digestion
+**Part Three · The Fire of Digestion**
 - [x] [Agni — the digestive fire, and āma](./agni.md)
-- [x] [The Six Tastes (rasa) — how each moves the three forces](./rasa.md)
 
-### Part III · Living in Rhythm
-- [x] [The Day (dinacharya) — the morning that steadies everything](./dinacharya.md)
-- [x] [The Seasons (ritucharya) — meeting the year as it turns](./ritucharya.md)
-- [x] [Sleep — the nurse of the body](./sleep.md)
-- [x] [Oil (abhyanga) — the daily kindness](./abhyanga.md)
+**Part Four · Living in Rhythm**
+- [x] [The Day (dinacharya)](./dinacharya.md)
+- [x] [The Seasons (ritucharya)](./ritucharya.md)
+- [x] [Sleep](./sleep.md)
+- [x] [Oil (abhyanga)](./abhyanga.md)
 
-### Part IV · What We Are Made Of
-- [x] [The Tissues (dhātu) — how the body builds itself](./dhatu.md)
-- [x] [The Channels (srotas) — how things flow, and how they block](./srotas.md)
+**Part Five · What We Are Made Of**
+- [x] [The Tissues (dhātu)](./dhatu.md)
+- [x] [The Channels (srotas)](./srotas.md)
 - [x] [Ojas — the sap of vitality](./ojas.md)
 
-### Part V · The Mind
-- [ ] Sattva, Rajas, Tamas — the weather of the mind
+**Part Six · The Mind**
+- [ ] The Three States of Mind (sattva, rajas, tamas)
 - [ ] The Senses — the doors we guard
+
+**An Author's Note** *(at the close)*
+- [ ] How this book was written — its sources, and its proper humility: that
+  Ayurveda is a living art, that even practitioners differ, and that the last
+  word belongs to a real human, never a book.
 
 ---
 
-*A living book. Each chapter is written to be read on its own, in a few quiet
-minutes, and to stand up to a practitioner's eye. It grows one chapter at a
-time; depth is the work, and the work is the point.*
+*A living book. Each chapter reads on its own in a few quiet minutes and stands
+up to a practitioner's eye. Chapter order and numbering are finalised in a single
+editing pass once the writing is done — **we write first, then sequence.** (The
+"Part N, chapter M" lines inside existing chapters still reflect the old order;
+they are corrected in that pass.)*
