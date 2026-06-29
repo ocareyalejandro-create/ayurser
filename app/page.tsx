@@ -10,6 +10,7 @@ import {
   type GuidanceLine,
 } from "@/lib/engine";
 import { saveCheckIn } from "@/lib/saveCheckIn";
+import { scanFeelings } from "@/lib/feelings";
 import { getName, setName } from "@/lib/name";
 import styles from "./checkin.module.css";
 
@@ -41,7 +42,7 @@ type Screen =
   | { kind: "intro" }
   | { kind: "question"; step: number }
   | { kind: "note"; result: Result } // the open door — an optional note in their own words
-  | { kind: "result"; result: Result };
+  | { kind: "result"; result: Result; note?: string };
 
 export default function CheckInPage() {
   const [screen, setScreen] = useState<Screen>({ kind: "loading" });
@@ -93,7 +94,7 @@ export default function CheckInPage() {
   // The open door: persist the check-in (with any free-text note in their own
   // words) and reveal the reading. Fire-and-forget — it never blocks the minute.
   function finishWithNote(result: Result, note: string) {
-    setScreen({ kind: "result", result });
+    setScreen({ kind: "result", result, note: note || undefined });
     void saveCheckIn({
       answers,
       qualities: result.tally,
@@ -121,7 +122,11 @@ export default function CheckInPage() {
           />
         )}
         {screen.kind === "result" && (
-          <ResultView result={screen.result} onAgain={() => setScreen({ kind: "intro" })} />
+          <ResultView
+            result={screen.result}
+            note={screen.note}
+            onAgain={() => setScreen({ kind: "intro" })}
+          />
         )}
       </div>
     </main>
@@ -294,8 +299,17 @@ function NoteView({
 
 /** Screen 3 — the result: read-out, one loud anchor, the quiet quartet, the
  *  epigraph, and the separated disclaimer. Plus the Wisdom card + teaser. */
-function ResultView({ result, onAgain }: { result: Result; onAgain: () => void }) {
+function ResultView({
+  result,
+  note,
+  onAgain,
+}: {
+  result: Result;
+  note?: string;
+  onAgain: () => void;
+}) {
   const { guidance } = result;
+  const noticed = note ? scanFeelings(note) : [];
   const [wisdomOpen, setWisdomOpen] = useState(false);
 
   return (
@@ -329,6 +343,20 @@ function ResultView({ result, onAgain }: { result: Result; onAgain: () => void }
           <GuidanceRow label="Breath" line={guidance.breath} />
           <GuidanceRow label="Move" line={guidance.move} />
         </div>
+
+        {/* In your words — the feeling → wisdom reflection, shown only when we
+            recognised something in their note. "We noticed", never a verdict. */}
+        {noticed.length > 0 && (
+          <div className={styles.fromWords}>
+            <p className={styles.fromWordsKicker}>In your words</p>
+            {noticed.map((m) => (
+              <div key={m.feeling} className={styles.fromWordsItem}>
+                <p className={styles.fromWordsFeeling}>You mentioned {m.feeling}.</p>
+                <p className={styles.fromWordsResponse}>{m.response}</p>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Wisdom, set as wisdom: a quiet serif epigraph, room to breathe. */}
         <figure className={styles.epigraph}>
