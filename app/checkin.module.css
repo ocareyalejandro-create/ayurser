@@ -325,6 +325,47 @@
   outline-offset: 2px;
 }
 
+/* ---- Note (the open door, after the five questions) ------------------------- */
+
+/* A quiet serif sub-line under "Anything else?" — the gentle invitation. */
+.noteSub {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--sage);
+  line-height: 1.5;
+  max-width: 400px;
+  margin-top: -22px;
+  margin-bottom: 26px;
+}
+
+/* The optional free-text field — the same sand-and-serif register as the options. */
+.noteField {
+  display: block;
+  width: 100%;
+  font-family: var(--serif);
+  font-size: 18px;
+  line-height: 1.55;
+  color: var(--char);
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-opt);
+  padding: 16px 18px;
+  outline: none;
+  resize: none;
+  transition: border-color 0.35s ease, background 0.35s ease;
+}
+
+.noteField::placeholder {
+  color: var(--sage);
+  opacity: 0.5;
+}
+
+.noteField:focus {
+  border-color: var(--accent);
+  background: rgba(140, 98, 54, 0.04);
+}
+
 /* ---- Result card ------------------------------------------------------------ */
 
 .card {

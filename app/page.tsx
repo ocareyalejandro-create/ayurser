@@ -40,6 +40,7 @@ type Screen =
   | { kind: "naming" } // first visit: "What shall we call you?"
   | { kind: "intro" }
   | { kind: "question"; step: number }
+  | { kind: "note"; result: Result } // the open door — an optional note in their own words
   | { kind: "result"; result: Result };
 
 export default function CheckInPage() {
@@ -77,20 +78,28 @@ export default function CheckInPage() {
       return;
     }
 
-    // Last answer in — compute the calm result and show it. Persistence is
-    // fire-and-forget: it must never block or break the minute.
+    // Last answer in — compute the calm result, then open the door: an optional
+    // note in their own words, before the reading. We defer persistence to the
+    // note step so the words are saved with the check-in.
     const result = evaluate(next);
-    setScreen({ kind: "result", result });
-    void saveCheckIn({
-      answers: next,
-      qualities: result.tally,
-      outcome: result.outcome,
-    });
+    setScreen({ kind: "note", result });
   }
 
   function back(step: number) {
     if (step > 0) setScreen({ kind: "question", step: step - 1 });
     else setScreen({ kind: "intro" });
+  }
+
+  // The open door: persist the check-in (with any free-text note in their own
+  // words) and reveal the reading. Fire-and-forget — it never blocks the minute.
+  function finishWithNote(result: Result, note: string) {
+    setScreen({ kind: "result", result });
+    void saveCheckIn({
+      answers,
+      qualities: result.tally,
+      outcome: result.outcome,
+      note: note || undefined,
+    });
   }
 
   return (
@@ -103,6 +112,12 @@ export default function CheckInPage() {
             step={screen.step}
             onChoose={choose}
             onBack={() => back(screen.step)}
+          />
+        )}
+        {screen.kind === "note" && (
+          <NoteView
+            onContinue={(note) => finishWithNote(screen.result, note)}
+            onSkip={() => finishWithNote(screen.result, "")}
           />
         )}
         {screen.kind === "result" && (
@@ -231,6 +246,46 @@ function QuestionView({
       <div>
         <button className={styles.back} onClick={onBack}>
           &larr;&nbsp;&nbsp;Back
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/** The open door — after the five taps, an optional line in their own words.
+ *  "How do you feel today?" answered in language, not just multiple choice.
+ *  Never required: Continue (with or without words) and Skip both lead to the
+ *  reading. We capture it now; the cited scan that reads these words comes next. */
+function NoteView({
+  onContinue,
+  onSkip,
+}: {
+  onContinue: (note: string) => void;
+  onSkip: () => void;
+}) {
+  const [value, setValue] = useState("");
+  return (
+    <div className="rise">
+      <h2 className={`serif ${styles.question}`}>Anything else?</h2>
+      <p className={styles.noteSub}>
+        In your own words &mdash; how you feel today. Only if you&rsquo;d like.
+      </p>
+      <textarea
+        className={styles.noteField}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="a little bloated, skin feels dry, mind is busy…"
+        aria-label="Anything else, in your own words"
+        rows={4}
+        maxLength={1000}
+        autoFocus
+      />
+      <button className={styles.btn} onClick={() => onContinue(value.trim())}>
+        Continue
+      </button>
+      <div>
+        <button className={styles.back} onClick={onSkip}>
+          Skip
         </button>
       </div>
     </div>

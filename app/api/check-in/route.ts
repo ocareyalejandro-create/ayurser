@@ -37,6 +37,8 @@ interface CheckInBody {
   readonly answers: Record<string, number>;
   readonly qualities: Record<string, number>;
   readonly outcome: Outcome;
+  /** Optional free-text note — the person's own words. */
+  readonly note?: string;
 }
 
 function isRecordOfNumbers(value: unknown): value is Record<string, number> {
@@ -65,11 +67,22 @@ function parseBody(raw: unknown): CheckInBody | { error: string } {
     return { error: "outcome missing or invalid" };
   }
 
+  // The note is optional. Accept a string, trim it, cap its length, and treat an
+  // empty note as absent (the door left closed). The boundary never trusts the client.
+  let note: string | undefined;
+  if (b.note !== undefined && b.note !== null) {
+    if (typeof b.note !== "string") return { error: "note must be a string" };
+    const trimmed = b.note.trim();
+    if (trimmed.length > 2000) return { error: "note too long" };
+    note = trimmed.length > 0 ? trimmed : undefined;
+  }
+
   return {
     deviceId: b.deviceId,
     answers: b.answers as Record<string, number>,
     qualities: b.qualities as Record<string, number>,
     outcome: b.outcome as Outcome,
+    note,
   };
 }
 
@@ -97,12 +110,13 @@ export async function POST(request: Request): Promise<Response> {
 
   try {
     await sql`
-      insert into check_ins (device_id, answers, qualities, outcome)
+      insert into check_ins (device_id, answers, qualities, outcome, note)
       values (
         ${parsed.deviceId},
         ${JSON.stringify(parsed.answers)}::jsonb,
         ${JSON.stringify(parsed.qualities)}::jsonb,
-        ${parsed.outcome}
+        ${parsed.outcome},
+        ${parsed.note ?? null}
       )
     `;
     return json({ saved: true }, 201);

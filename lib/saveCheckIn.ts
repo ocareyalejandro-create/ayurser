@@ -23,6 +23,10 @@ export interface CheckInRecord {
   readonly qualities: QualityTally;
   /** The read-out / cluster outcome (balanced | single | mixed). */
   readonly outcome: Outcome;
+  /** Optional free-text note — the person's own words ("the open door"): how
+   *  they feel today, in their language. Captured from the first morning, never
+   *  required. */
+  readonly note?: string;
 }
 
 /**
@@ -42,6 +46,8 @@ export async function saveCheckIn(record: CheckInRecord): Promise<boolean> {
         answers: record.answers,
         qualities: record.qualities,
         outcome: record.outcome,
+        // undefined when the door was left closed — JSON.stringify drops it.
+        note: record.note,
       }),
       // The minute is already done; don't keep the page busy waiting on this.
       keepalive: true,
