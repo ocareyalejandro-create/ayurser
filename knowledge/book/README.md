@@ -11,6 +11,11 @@ modern teachers in each chapter's References. **We learn from them; we never cop
 them.** No claim is made beyond what the sources hold; where we are uncertain, we
 say so, or send the reader to a practitioner.
 
+Ayurveda is a living art, not a fixed doctrine — even practitioners, its truest
+source, disagree among themselves. So this book holds the *convergent* ground,
+names where the art varies, and never pretends to be the last word: the
+individual is always sent to a real human, who reads what no book can.
+
 > *Like increases like; opposites lead to decrease.*
 > — *Aṣṭāṅga Hṛdaya*, Sūtrasthāna 1.13½ — the law beneath every page.
 
@@ -24,8 +29,8 @@ say so, or send the reader to a practitioner.
 - [x] [Kapha — the Earth](./kapha.md)
 
 ### Part II · The Fire of Digestion
-- [ ] Agni — the digestive fire, and āma, what it leaves undone
-- [ ] The Six Tastes (rasa) — and how each moves the three forces
+- [x] [Agni — the digestive fire, and āma](./agni.md)
+- [x] [The Six Tastes (rasa) — how each moves the three forces](./rasa.md)
 
 ### Part III · Living in Rhythm
 - [ ] The Day (dinacharya) — the morning that steadies everything
