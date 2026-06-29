@@ -39,7 +39,7 @@ individual is always sent to a real human, who reads what no book can.
 - [x] [Oil (abhyanga) — the daily kindness](./abhyanga.md)
 
 ### Part IV · What We Are Made Of
-- [ ] The Tissues (dhātu) — how the body builds itself
+- [x] [The Tissues (dhātu) — how the body builds itself](./dhatu.md)
 - [ ] The Channels (srotas) — how things flow, and how they block
 - [ ] Ojas — the sap of vitality
 
