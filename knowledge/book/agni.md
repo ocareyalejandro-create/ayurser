@@ -69,6 +69,11 @@ and not to be smothered.
 - **When āma is high, lighten.** Warm water, simple warm food, a day of less —
   until the tongue clears and true hunger returns. Then feed it properly again.
 
+## Today, try this
+
+Make lunch your largest meal today, while the sun — and your fire — is high; keep
+the evening meal light and early. Notice how much more easily you sleep.
+
 ## In a breath
 
 The fire is the body's first physician. Feed it when it is hungry, let it rest

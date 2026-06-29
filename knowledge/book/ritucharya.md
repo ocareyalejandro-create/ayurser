@@ -51,6 +51,12 @@ fruits arrive in the heat; dense grounding roots keep through the cold. To eat
 local and in season is, more often than not, to eat the very thing the weather is
 asking for.
 
+## Today, try this
+
+Ask what season it is outside your window, and meet it just once today: something
+light and pungent if it's damp spring, something cool and sweet if it's high
+summer, something warm and oily if it's dry autumn.
+
 ## In a breath
 
 Live with the year, not against it. Lighten in spring, cool in summer, ground in

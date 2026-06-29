@@ -61,6 +61,12 @@ you should not farm your attention; it should give you one calm thing and send
 you back to your life. An app that guards your senses rather than raiding them is
 the only kind worth keeping on your morning.
 
+## Today, try this
+
+Guard one edge of the day: keep the first ten minutes after waking, *or* the last
+ten before sleep, free of the screen. Give the senses that much quiet, and watch
+the mind follow.
+
 ## In a breath
 
 The senses are doors, and what comes through them feeds the mind. Tend that diet

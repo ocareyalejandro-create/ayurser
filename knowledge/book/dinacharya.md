@@ -63,6 +63,12 @@ We built this whole app around a single steady minute in the morning. That minut
 willpower won't. You do not need the whole sequence to begin. You need one thing,
 done each morning. The rest can grow around it.
 
+## Today, try this
+
+Choose one anchor — scraping the tongue, a glass of warm water, a quiet minute —
+and do it tomorrow at the same hour you did it today. One steady thread is where a
+rhythm begins.
+
 ## In a breath
 
 Give the day a shape and the body relaxes into it. Wake near dawn, eat with the

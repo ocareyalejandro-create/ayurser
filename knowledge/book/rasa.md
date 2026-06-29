@@ -68,6 +68,12 @@ something pungent, something bitter, and so on. When your weather is even, eat
 all six. When one force is speaking, lean on the tastes that quiet it, and go
 gently on those that feed it. The tongue, tended this way, becomes a daily guide.
 
+## Today, try this
+
+At your next meal, look for the missing taste. If the plate is all sweet and
+heavy, add something bitter or pungent — a few greens, a little ginger. A plate
+that holds all six tastes is a plate that holds you closer to balance.
+
 ## In a breath
 
 Six tastes, six tools. Sweet, sour and salt to ground; pungent, bitter and

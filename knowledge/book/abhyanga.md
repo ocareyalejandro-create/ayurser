@@ -59,6 +59,12 @@ the practices, this is the gentlest to keep and the kindest to feel: five minute
 warm oil, your own two hands, before the day takes you. It asks almost nothing and
 gives back warmth, steadiness, and the simple sense of having tended yourself.
 
+## Today, try this
+
+Tomorrow morning, warm a little oil and spend three unhurried minutes working it
+into your skin before you wash — the feet and the crown of the head first. Notice
+what it feels like to be tended, by your own two hands.
+
 ## In a breath
 
 Warm oil, a few unhurried minutes, the feet and the crown first. Daily, it settles

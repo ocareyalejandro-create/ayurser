@@ -97,6 +97,11 @@ returning to it because it is the engine beneath everything above:
 
 All we have said about the wind is only this law, applied with care.
 
+## Today, try this
+
+Tonight, warm a little sesame oil and rub it into the soles of your feet before
+bed. One minute, no more. Notice how the mind quiets as the feet warm.
+
 ## In a breath
 
 The wind is dryness, cold, and motion. Meet it with oil, warmth, and steadiness

@@ -90,6 +90,12 @@ food, the steady rhythm, the daily oil, the good sleep, the one honest minute �
 is, in the end, in service of this single subtle thing: the slow gathering of the
 sap of vitality, in a life that keeps trying to spend it.
 
+## Today, try this
+
+Choose one thing today that *gathers* you rather than spends you — an early night,
+a warm nourishing meal, an unhurried hour with someone you love. Ojas is built in
+small moments like these.
+
 ## In a breath
 
 Ojas is the body's distilled vitality — the glow, the calm, the immunity, the

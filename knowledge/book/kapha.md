@@ -80,6 +80,12 @@ well; when it pools and stagnates, the same heaviness that protected begins to
 cling. *(After the Caraka Saṃhitā, Sūtrasthāna, on kapha — rendered in our own
 words.)*
 
+## Today, try this
+
+Before you reach for breakfast or the phone, move for five minutes — a brisk
+walk, a few stretches, anything that lifts the weight. Begin the day in motion,
+not in bed.
+
 ## In a breath
 
 The earth is weight, cold, and stillness. Meet it with lightness, warmth, and

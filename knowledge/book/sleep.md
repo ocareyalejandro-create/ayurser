@@ -54,6 +54,11 @@ early. Dimming light. Slowing down. Warmth — oil worked into the soles of the
 feet is the oldest answer for a restless mind. And the screen set aside well
 before the pillow.
 
+## Today, try this
+
+Tonight, set the screen down half an hour before bed and warm your feet — socks,
+or a little oil. Let the evening lean toward rest, and let sleep come to meet you.
+
 ## In a breath
 
 Sleep is one of the three things holding your life up. Be down before the night

@@ -65,6 +65,13 @@ same qualities made edible — the warming, the cooling, the lightening, the
 grounding — so that food becomes the most everyday medicine of all. Learn the
 qualities, and both of those become easy.
 
+## Today, try this
+
+Read your weather right now in a few plain words — *more cold or hot? dry or
+oily? heavy or light? restless or settled?* Then reach, just once, for one small
+opposite: a warm drink for the cold, a slow breath for the restless, a short walk
+for the heavy. That single move is the whole practice.
+
 ## In a breath
 
 Everything can be read as a few felt qualities — hot or cold, dry or oily, heavy

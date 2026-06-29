@@ -83,6 +83,12 @@ steady strength, clear mind. Where it burns too hot, it consumes what it was
 meant to sustain. *(After the Caraka Saṃhitā, Sūtrasthāna, on agni — rendered in
 our own words.)*
 
+## Today, try this
+
+Take one thing off the fire today: skip the second coffee, step into the shade at
+midday, or let one small irritation simply pass unanswered. Cool a single degree,
+on purpose.
+
 ## In a breath
 
 The fire is heat, sharpness, and intensity. Meet it with coolness, sweetness,

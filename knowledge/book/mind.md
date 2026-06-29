@@ -61,6 +61,12 @@ unable to begin. The way back is not more drive. It is the slow, sattvic return:
 warmth, rhythm, rest, simplicity, and the one quiet minute repeated until the
 clarity comes back on its own.
 
+## Today, try this
+
+Do one *sattvic* thing on purpose today — ten quiet minutes in nature, a meal
+eaten without a screen, a real conversation, a few slow breaths. Notice the mind
+grow a shade clearer.
+
 ## In a breath
 
 The mind has three weathers — clear (sattva), driven (rajas), heavy (tamas). We
