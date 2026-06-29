@@ -25,6 +25,15 @@ describe("scanFeelings", () => {
     expect(scanFeelings("did the laundry")).toHaveLength(0);
   });
 
+  it("recognises the newer feelings", () => {
+    expect(scanFeelings("i'm constipated").map((m) => m.feeling)).toContain("constipation");
+    expect(scanFeelings("my neck is so tight").map((m) => m.feeling)).toContain(
+      "tension or stiffness",
+    );
+    expect(scanFeelings("i feel cold all over").map((m) => m.feeling)).toContain("feeling cold");
+    expect(scanFeelings("i have a headache").map((m) => m.feeling)).toContain("a headache");
+  });
+
   it("caps the number of reflections at MAX_FEELINGS", () => {
     const busy = "bloated, dry, anxious, heavy, hot, exhausted";
     expect(scanFeelings(busy).length).toBeLessThanOrEqual(MAX_FEELINGS);

@@ -151,6 +151,36 @@ const FEELINGS: readonly FeelingEntry[] = [
     source: "after Lad, *The Science of Self-Healing*, p. 102 · Aṣṭāṅga Hṛdaya, Sū. 2",
   },
   {
+    feeling: "constipation",
+    patterns: [/\bconstipat/i, /\bcan'?t go\b/i, /\bnot regular\b/i],
+    qualities: ["dry", "mobile"],
+    response:
+      "When things slow and dry, the body holds on. Warmth and moisture coax it " +
+      "loose — cooked food with a little oil, warm water through the day, and a " +
+      "steady, unhurried morning. The gut loves rhythm above all.",
+    source: "after Lad, *The Science of Self-Healing* (Vāta) · Aṣṭāṅga Hṛdaya",
+  },
+  {
+    feeling: "tension or stiffness",
+    patterns: [/\btense\b/i, /\btension\b/i, /\btight\b/i, /\bstiff\b/i, /\bclenched\b/i, /\bknotted\b/i],
+    qualities: ["dry", "mobile"],
+    response:
+      "Tightness gathers where the body has gone cold and unsettled — the neck, " +
+      "the jaw, the shoulders. Warmth loosens it: oil worked into the stiff " +
+      "places, slow movement, a long breath. Hold less, and it begins to let go.",
+    source: "after Lad, *The Science of Self-Healing* (Vāta) · Aṣṭāṅga Hṛdaya, Sū. 2.8–9",
+  },
+  {
+    feeling: "feeling cold",
+    patterns: [/\bcold\b/i, /\bchilly\b/i, /\bcan'?t get warm\b/i, /\bfreezing\b/i, /\bshiver/i],
+    qualities: ["cold"],
+    response:
+      "Cold settling into the hands and feet is the body losing its warmth. Give " +
+      "it back, simply — warm food and drink, a little movement to stir the " +
+      "blood, oil and warmth where you feel it most. The body keeps the heat you tend.",
+    source: "after Lad, *The Science of Self-Healing* · Aṣṭāṅga Hṛdaya, Sū. 1.14",
+  },
+  {
     feeling: "low energy",
     patterns: [
       /\btired\b/i,
@@ -166,6 +196,17 @@ const FEELINGS: readonly FeelingEntry[] = [
       "Low energy keeps many doors. Begin gently — warmth, real nourishment, " +
       "true rest — and notice what returns. If the tiredness lingers, let a " +
       "practitioner look closer; some things ask for a human eye.",
+    source: "after Lad, *The Science of Self-Healing*",
+  },
+  {
+    feeling: "a headache",
+    patterns: [/\bheadache\b/i, /\bmigraine\b/i, /\bhead hurts\b/i, /\bhead is pounding\b/i],
+    qualities: [],
+    response:
+      "A headache speaks in many tongues — heat, tension, hunger, too little " +
+      "rest. Begin with the gentle ones: water, a quieter hour, warmth or cool " +
+      "where it helps. If it returns often, let a practitioner listen closely; " +
+      "the recurring ache is theirs to read.",
     source: "after Lad, *The Science of Self-Healing*",
   },
 ];
